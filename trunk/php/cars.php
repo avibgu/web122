@@ -36,10 +36,10 @@
 			if ($row = mysql_fetch_array($result)){
 			
 				echo "<div class=\"span4\">";
-				echo "	<h2>" . $row['Brand'] . " " . $row['Model'] . " " . $row['Year'] . "</h2>";
+				echo "	<h2>" . $row['Brand'] . " " . $row['Model'] . "</h2>";
 				echo "	<br/>";	
 				echo "	<img src=\"pics/" . $row['id'] . "/0.jpg\"/>";
-				echo "	<p>" . $row['Specification'] . "</p>";
+				echo "	<p>" . $row['Description'] . "</p>";
 				echo "<p><a href=\"#\" onClick=\"loadWithParams('php/someCar.php', '" . $row['id'] . "')\">View details &#187;</a></p>";
 				echo "</div><!--/span-->";
 			}
