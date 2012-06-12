@@ -55,6 +55,11 @@ function load(page)
 	get(page, "", "mainDiv");
 }
 
+function loadWithParams(page, params)
+{
+	get(page, params, "mainDiv");
+}
+
 function activeHome()
 {
 	document.getElementById("navLiDefault").className = "active";
