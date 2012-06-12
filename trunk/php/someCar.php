@@ -1,64 +1,52 @@
-<div class="hero-unit">
-            <h1>Mazda 3</h1>
-			<br/>
-            <p>
-			Attributes:<br/><br/>
-			<ul>
-				<li> Air Conditioning</li>
-				<li> Seats - 5</li>
-				<li> Gear - Automatic</li>
-				<li> Luggage Room - 1 Luggage</li>
-			</ul>
-			</p>
-			
-			<br/>
-	   
-			<p><a class="btn btn-warning btn-large" href="../rent.xhtml">Rent this Car &#187;</a></p>
-       
-          </div>
-         
-		 <div class="row-fluid">
-		  
-            <div class="span4" >
-              <a href="../pics/mazda3/mazda3-1.jpg">
-				<img src="../pics/mazda3/mazda3-1.jpg"/>
-			  </a>
-            </div><!--/span-->
-            
-			<div class="span4">
-              <a href="../pics/mazda3/mazda3-2.jpg">
-				<img src="../pics/mazda3/mazda3-2.jpg"/>
-			  </a>
-            </div><!--/span-->
-			
-			<div class="span4">
-              <a href="../pics/mazda3/mazda3-3.jpg">
-				<img src="../pics/mazda3/mazda3-3.jpg"/>
-			  </a>
-            </div><!--/span-->
-			
-          </div><!--/row-->
-          
-		  <br/><br/>
-		  
-		 <div class="row-fluid">
-		  
-            <div class="span4">
-              <a href="../pics/mazda3/mazda3-3.jpg">
-				<img src="../pics/mazda3/mazda3-4.jpg"/>
-			  </a>
-            </div><!--/span-->
-            
-			<div class="span4">
-             <a href="../pics/mazda3/mazda3-5.jpeg">
-				<img src="../pics/mazda3/mazda3-5.jpeg"/>
-			  </a>
-            </div><!--/span-->
-			
-			<div class="span4">
-              <a href="../pics/mazda3/mazda3-6.jpg">
-				<img src="../pics/mazda3/mazda3-6.jpg"/>
-			  </a>
-            </div><!--/span-->
-			
-          </div><!--/row-->
+<?php
+
+$con = mysql_connect("localhost","root","zubur1");
+
+if (!$con)
+	die('Could not connect: ' . mysql_error());
+
+mysql_select_db("web", $con);
+
+$query = "SELECT * FROM cartype WHERE id = '" . $_GET['car'] . "'";
+
+$result = mysql_query($query);
+
+if ($row = mysql_fetch_array($result)){
+
+	echo "<div class=\"hero-unit\">";
+	echo "	<h1>" . $row['Brand'] . " " . $row['Model'] . "</h1>";
+	echo "	<br/>";
+	echo "	<p>Attributes:<br/>" . $row['Attributes'] . "</p>";
+	echo "	<br/><p><a class=\"btn btn-warning btn-large\" href=\"#\" onClick=\"loadWithParams('php/rent.php', 'car=" . $row['id'] . "')\">Rent this Car &#187;</a></p>";
+	echo "</div>";
+	
+	echo "<div class=\"row-fluid\">";
+	
+	for ($i = 1; $i <= 3; $i++){
+	
+		echo "<div class=\"span4\">";
+        echo "	<a href=\"pics/" . $row['id'] . "/" . $i . ".jpg\">";
+		echo "		<img src=\"pics/" . $row['id'] . "/" . $i .".jpg\"/>";
+		echo "	</a>";
+        echo "</div><!--/span-->";
+	}
+	
+	echo "</div><!--/row-->";
+	echo "<br/><br/>"; 
+	echo "<div class=\"row-fluid\">";
+	
+	for ($i = 4; $i <= 6; $i++){
+	
+		echo "<div class=\"span4\">";
+        echo "	<a href=\"pics/" . $row['id'] . "/" . $i . ".jpg\">";
+		echo "		<img src=\"pics/" . $row['id'] . "/" . $i .".jpg\"/>";
+		echo "	</a>";
+        echo "</div><!--/span-->";
+	}
+	
+	echo "</div><!--/row-->";
+}
+
+mysql_close($con);
+	
+?>

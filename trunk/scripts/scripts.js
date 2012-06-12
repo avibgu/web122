@@ -22,7 +22,7 @@ function get(page, params, whereToLoad)
 		xmlhttp.open("GET", page, true);
 		
 	else
-		xmlhttp.open("GET", page + "?=" + params, true);
+		xmlhttp.open("GET", page + "?" + params, true);
 		
 	xmlhttp.send();
 }
