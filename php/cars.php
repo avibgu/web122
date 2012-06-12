@@ -40,7 +40,7 @@
 				echo "	<br/>";	
 				echo "	<img src=\"pics/" . $row['id'] . "/0.jpg\"/>";
 				echo "	<p>" . $row['Description'] . "</p>";
-				echo "<p><a href=\"#\" onClick=\"loadWithParams('php/someCar.php', '" . $row['id'] . "')\">View details &#187;</a></p>";
+				echo "<p><a href=\"#\" onClick=\"loadWithParams('php/someCar.php', 'car=" . $row['id'] . "')\">View details &#187;</a></p>";
 				echo "</div><!--/span-->";
 			}
 			
