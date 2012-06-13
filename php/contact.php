@@ -30,7 +30,7 @@
 
 		<table>
 		
-			<form action="#" method="POST">
+			<form name="contactForm" class="form">
 			
 				<tr>
 					<td>Full Name*</td>
@@ -53,13 +53,15 @@
 				
 				<tr>
 					<td></td>
-					<td><textarea id="text-area" > </textarea></td>
+					<td><textarea id="text-area" name="details"> </textarea></td>
 				</tr>
-				
+
 				<tr><!--button-->
 					<td></td>
-					<td><input type="submit" value="send"/>
-					<input type="reset" value="clear"/></td>
+					<td>
+						<a class="btn btn-success" href="#" onClick="validateAndSendContactForm()">Send</a>
+						<a class="btn" href="#" onClick="load('php/contact.php')">Clear</a>
+					</td>
 				</tr>
 				
 			</form>
