@@ -82,32 +82,6 @@ function reloadNavBar()
 	get("php/navbar.php", "", "navbarDiv");
 }
 
-function clearRentForm()
-{
-	document.forms["rentForm"]["Brand"].value = "Brand";
-	document.forms["rentForm"]["PickupYear"].value = "Year";
-	document.forms["rentForm"]["PickupMonth"].value = "Month";
-	document.forms["rentForm"]["PickupDay"].value = "Day";
-	document.forms["rentForm"]["PickupTime"].value = "Time";
-	
-	var yearSelect = document.forms["rentForm"]["Year"];
-	
-	for (i = yearSelect.length - 1; i>=0; i--)
-		yearSelect.remove(i);
-		
-	var option = document.createElement('option');
-	
-    option.text = "Year";
-    option.value = "Year";
-	
-	yearSelect.add(option, 0);
-	
-	document.forms["rentForm"]["ReturnYear"].value = "Year";
-	document.forms["rentForm"]["ReturnMonth"].value = "Month";
-	document.forms["rentForm"]["ReturnDay"].value = "Day";
-	document.forms["rentForm"]["ReturnTime"].value = "Time";
-}
-
 function validateAndSendRentForm()
 {
 	// Brand, PickupYear, PickupMonth, PickupDay, PickupTime
@@ -199,6 +173,19 @@ function validateAndSendRentForm()
 	
 	if (null == username || "" == username){
 		alert("you should be logged-in in order to Rent!");
+		return false;
+	}
+	
+	var PickupHours = PickupTime.split(":")[0];
+	var PickupMinutes = PickupTime.split(":")[1];
+	var PickupDate = new Date(PickupYear, PickupMonth, PickupDay, PickupHours, PickupMinutes, 0, 0);
+
+	var ReturnHours = ReturnTime.split(":")[0];
+	var ReturnMinutes = ReturnTime.split(":")[1];
+	var ReturnDate = new Date(ReturnYear, ReturnMonth, ReturnDay, ReturnHours, ReturnMinutes, 0, 0);
+
+	if (PickupDate.getTime() > ReturnDate.getTime()){
+		alert("Return Date is before the Pickup Date !");
 		return false;
 	}
 	
@@ -300,4 +287,3 @@ function clearRegForm()
 	}
 	document.getElementById("checkboxAgree").checked = false;*/
 }
-
