@@ -7,8 +7,12 @@
 
 	mysql_select_db("web", $con);
 
-	$insert =	"INSERT INTO contact (FullName, Phone, EMail, Details) " .
-				"VALUES ('$_POST[name]','$_POST[phone]','$_POST[email]','$_POST[details]')";
+	$name = $_POST['name'];
+	$phone = $_POST['phone'];
+	$email = $_POST['email'];
+	$details = $_POST['details'];
+	
+	$insert = "INSERT INTO contact (FullName, Phone, EMail, Details) VALUES ('$name','$phone','$email','$details')";
 				
 	if (!mysql_query($insert, $con)){
 
