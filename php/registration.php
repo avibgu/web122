@@ -44,7 +44,7 @@
 				
 				<label class="control-label" for="selectYear selectMonth selectDay">Date of Birth</label>
 				<div class="controls">
-					<select class="span2" id="selectYear">
+					<select class="span2" id="selectYearBirth">
 						<option value="Year">Year</option>
 						<option value="1991">1991</option>
 						<option value="1990">1990</option>
@@ -69,7 +69,7 @@
 						<option value="1971">1971</option>
 						<option value="1970">1970</option>
 					</select>
-					<select class= "span2" id="selectMonth">
+					<select class= "span2" id="selectMonthBirth">
 						<option value='Month'>Month</option>
 						<option value="01">01</option>
 						<option value="02">02</option>
@@ -84,7 +84,7 @@
 						<option value="11">11</option>
 						<option value="12">12</option>
 					</select>
-					<select class= "span2" id="selectDay">
+					<select class= "span2" id="selectDayBirth">
 						<option value='Day'>Day</option>
 						<option value='01'>01</option>
 						<option value='02'>02</option>
@@ -216,8 +216,8 @@
 				</div>
 	
 				<div class="form-actions">
-					<button type="submit" class="btn btn-primary" id="buttonRegister">Register</button>
-					<button class="btn" id="buttonClearForm">Clear Form</button>
+					<button type="submit" class="btn btn-primary" id="buttonRegister" onclick="validateRegForm()">Register</button>
+					<button class="btn" id="buttonClearForm" onclick="clearRegForm()">Clear Form</button>
 				</div>
 			
 			</div>
