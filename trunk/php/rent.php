@@ -222,7 +222,7 @@
 			
 			<div class="row-fluid form-actions span3">
 				<button type="submit" class="btn btn-success" id="buttonRent">Rent!</button>
-				<button class="btn" id="buttonClearForm">Clear Form</button>
+				<button class="btn" onClick="load('php/rent.php')">Clear Form</button>
 			</div>
 			
 		</fieldset>
