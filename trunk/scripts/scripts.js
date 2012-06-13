@@ -212,6 +212,42 @@ function getCookie(c_name)
 	}
 }
 
+function validateAndSendContactForm()
+{
+	
+	var form = document.forms["contactForm"];
+	
+	var name = form["name"].value;
+	
+	if (null == name || "" == name) {
+	
+		alert("Full Name must be filled out");
+		return false;
+	}
+	
+	var phone = form["phone"].value;
+	
+	var email = form["email"].value;
+	
+	if (null == email || "" == email) {
+	
+		alert("EMail must be filled out");
+		return false;
+	}
+	
+	var details = form["details"].value;
+	
+	if (null == details || "" == details) {
+	
+		alert("Details must be filled out");
+		return false;
+	}
+	
+	var content = "name=" + name + "&phone=" + phone + "&email=" + email + "&details=" + details;
+	
+	post('php/contactForm.php', content, 'mainDiv');
+}
+
 function validateRegForm()
 {
 	var x = document.getElementById("inputID");
