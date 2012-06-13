@@ -47,6 +47,7 @@ function post(page, content, whereToLoad)
 	}
 	
 	xmlhttp.open("POST", page, true);
+	xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 	xmlhttp.send(content);
 }
 
@@ -89,17 +90,17 @@ function clearRentForm()
 	document.forms["rentForm"]["PickupDay"].value = "Day";
 	document.forms["rentForm"]["PickupTime"].value = "Time";
 	
-	var elSel = document.forms["rentForm"]["Year"];
+	var yearSelect = document.forms["rentForm"]["Year"];
 	
-	for (i = elSel.length - 1; i>=0; i--)
-		elSel.remove(i);
+	for (i = yearSelect.length - 1; i>=0; i--)
+		yearSelect.remove(i);
 		
-	var elOptNew = document.createElement('option');
+	var option = document.createElement('option');
 	
-    elOptNew.text = "Year";
-    elOptNew.value = "Year";
+    option.text = "Year";
+    option.value = "Year";
 	
-	elSel.add(elOptNew, 0);
+	yearSelect.add(option, 0);
 	
 	document.forms["rentForm"]["ReturnYear"].value = "Year";
 	document.forms["rentForm"]["ReturnMonth"].value = "Month";
@@ -107,17 +108,119 @@ function clearRentForm()
 	document.forms["rentForm"]["ReturnTime"].value = "Time";
 }
 
-function validateRentForm()
+function validateAndSendRentForm()
 {
-
 	// Brand, PickupYear, PickupMonth, PickupDay, PickupTime
 	// Year, ReturnYear, ReturnMonth, ReturnDay, ReturnTime
 
-	var x = document.forms["rentForm"]["Brand"].value;
+	var form = document.forms["rentForm"];
 	
-	if (null == x || "" == x || "Brand" == x) {
+	var Brand = form["Brand"].value;
 	
-		alert("First name must be filled out");
+	if (null == Brand || "" == Brand || "Brand" == Brand) {
+	
+		alert("Brand must be filled out");
 		return false;
+	}
+	
+	var PickupYear = form["PickupYear"].value;
+	
+	if (null == PickupYear || "" == PickupYear || "Year" == PickupYear) {
+	
+		alert("PickupYear must be filled out");
+		return false;
+	}
+	
+	var PickupMonth = form["PickupMonth"].value;
+	
+	if (null == PickupMonth || "" == PickupMonth || "Month" == PickupMonth) {
+	
+		alert("PickupMonth must be filled out");
+		return false;
+	}
+	
+	var PickupDay = form["PickupDay"].value;
+	
+	if (null == PickupDay || "" == PickupDay || "Day" == PickupDay) {
+	
+		alert("PickupDay must be filled out");
+		return false;
+	}
+	
+	var PickupTime = form["PickupTime"].value;
+	
+	if (null == PickupTime || "" == PickupTime || "Time" == PickupTime) {
+	
+		alert("PickupTime must be filled out");
+		return false;
+	}
+	
+	var Year = form["Year"].value;
+	
+	if (null == Year || "" == Year || "Year" == Year) {
+	
+		alert("Year must be filled out");
+		return false;
+	}
+	
+	var ReturnYear = form["ReturnYear"].value;
+	
+	if (null == ReturnYear || "" == ReturnYear || "Year" == ReturnYear) {
+	
+		alert("ReturnYear must be filled out");
+		return false;
+	}
+	
+	var ReturnMonth = form["ReturnMonth"].value;
+	
+	if (null == ReturnMonth || "" == ReturnMonth || "Month" == ReturnMonth) {
+	
+		alert("ReturnMonth must be filled out");
+		return false;
+	}
+	
+	var ReturnDay = form["ReturnDay"].value;
+	
+	if (null == ReturnDay || "" == ReturnDay || "Day" == ReturnDay) {
+	
+		alert("ReturnDay must be filled out");
+		return false;
+	}
+	
+	var ReturnTime = form["ReturnTime"].value;
+	
+	if (null == ReturnTime || "" == ReturnTime || "Time" == ReturnTime) {
+	
+		alert("ReturnTime must be filled out");
+		return false;
+	}
+	
+	var username = getCookie("username");
+	
+	if (null == username || "" == username){
+		alert("you should be logged-in in order to Rent!");
+		return false;
+	}
+	
+	var content =	Brand + "&PickupYear=" + PickupYear + "&PickupMonth=" + PickupMonth +
+					"&PickupDay=" + PickupDay + "&PickupTime=" + PickupTime + "&Year=" + Year +
+					"&ReturnYear=" + ReturnYear +"&ReturnMonth=" + ReturnMonth + 
+					"&ReturnDay=" + ReturnDay + "&ReturnTime=" + ReturnTime;
+	
+	post('php/rentForm.php', content, 'mainDiv');
+}
+
+function getCookie(c_name)
+{
+	var i,x,y,ARRcookies = document.cookie.split(";");
+	
+	for (i = 0; i < ARRcookies.length; i++) {
+	
+		x = ARRcookies[i].substr(0,ARRcookies[i].indexOf("="));
+		y = ARRcookies[i].substr(ARRcookies[i].indexOf("=")+1);
+		x = x.replace(/^\s+|\s+$/g,"");
+	
+		if (x==c_name)
+			return unescape(y);
 	}
 }
