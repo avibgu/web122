@@ -44,8 +44,19 @@
 				"(CarId, CustomerId, EmployeeId, PickUpDate, PickUpTime, ReturnDate, ReturnTime, Price, Approval) ".
 				"VALUES ('$CarId','$CustomerId','$EmployeeId','$PickUpDate','$PickUpTime','$ReturnDate','$ReturnTime','$Price','$Approval')";
 				
-	if (!mysql_query($insert, $con))
-		die('Error: ' . mysql_error());
+	if (!mysql_query($insert, $con)){
+
+?>
+
+<div class="hero-unit">
+
+	<h3>There was an issue with the lease, Please call our Support.</h3>
+	
+</div>
+
+<?php
+	
+	}
 
 	else {
 ?>
