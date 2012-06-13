@@ -224,3 +224,80 @@ function getCookie(c_name)
 			return unescape(y);
 	}
 }
+
+function validateRegForm()
+{
+	var x = document.getElementById("inputID");
+	if (x.value=="" || x.value.length!=9)
+		x.style.backgroundColor = "#FF5050";
+	x = document.getElementById("inputFirstName");
+	if (x.value=="" || IsNumeric(x.value))
+		x.style.backgroundColor = "#FF5050";
+	x = document.getElementById("inputLastName");
+	if (x.value=="" || IsNumeric(x.value))
+		x.style.backgroundColor = "#FF5050";
+	x = document.getElementById("inputAddress");
+	if (x.value=="")
+		x.style.backgroundColor = "#FF5050";
+	x = document.getElementById("inputCity");
+	if (x.value=="")
+		x.style.backgroundColor = "#FF5050";
+	x = document.getElementById("inputZipCode");
+	if (!IsNumeric(x.value))
+		x.style.backgroundColor = "#FF5050";
+	x = document.getElementById("inputPhone");
+	if (x.value=="" || !IsNumeric(x.value) || x.value.length < 6 || x.value.length > 10)
+		x.style.backgroundColor = "#FF5050";
+	x = document.getElementById("inputEmail");
+	var atpos=x.value.indexOf("@");
+	var dotpos=x.value.lastIndexOf(".");
+	if (x.value=="" || atpos < 0 || dotpos < 0 || dotpos < atpos)
+		x.style.backgroundColor = "#FF5050";
+	x = document.getElementById("inputPassword");
+	if (x.value.length > 3 || x.value.length < 13){
+		alert("Password length 4-12");
+		x.style.backgroundColor = "#FF5050";
+	}
+	var passRetype = document.getElementById("inputRetypePassword");
+	if (x.value != passRetype.value)
+		passRetype.style.backgroundColor = "#FF5050";
+	x = document.getElementById("inputLicenseNo");
+	if (x.value=="" || !IsNumeric(x.value))
+		x.style.backgroundColor = "#FF5050";
+	x = document.getElementById("checkboxAgree");
+	if (x.value.checked != true)
+		alert("Must Agree To Terms");
+		
+}
+
+function IsNumeric(sText)
+{
+   var ValidChars = "0123456789";
+   var IsNumber=true;
+   var Char;
+ 
+   for (i = 0; i < sText.length && IsNumber == true; i++){ 
+      Char = sText.charAt(i); 
+      if (ValidChars.indexOf(Char) == -1){
+         return false;
+         }
+   }
+   return IsNumber;
+}
+
+function clearRegForm()
+{
+	load('php/registration.php');
+	/*var fields = new Array("inputID","inputFirstName","inputLastName","inputAddress","inputCity","inputZipCode","inputPhone","inputEmail","inputPassword",
+		"inputRetypePassword","inputLicenseNo","inputLicenseNo","selectYear","selectMonth","selectDay","selectYearBirth","selectMonthBirth",
+		"selectDayBirth");
+	var i;
+	for (i=0; i<fields.length; i++){
+		var input = document.getElementById(fields[i]);
+		var p = input.parentNode;
+		p.innerHTML = p.innerHTML;
+		input.style.backgroundColor = "#FFFFFF";
+	}
+	document.getElementById("checkboxAgree").checked = false;*/
+}
+
