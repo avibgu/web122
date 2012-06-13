@@ -4,7 +4,7 @@
 
 	<br/>
 	
-	<form class="form">
+	<form name="rentForm" class="form" method="post" onsubmit="validateRentForm()">
 
 		<fieldset>
 
@@ -16,7 +16,7 @@
 					
 					<div class="controls">
 
-						<select id="selectCarBrand" onchange="get('php/carYears.php', this.value, 'selectCarYear')">
+						<select name="Brand" id="selectCarBrand" onchange="get('php/carYears.php', this.value, 'selectCarYear')">
 							
 						<?php
 
@@ -68,14 +68,14 @@
 
 					<div class="controls">
 
-						<select id="selectPickupYear">
+						<select name="PickupYear" id="selectPickupYear">
 							<option value="Year">Year</option>
 							<option value="2012">2012</option>
 							<option value="2013">2013</option>
 							<option value="2014">2014</option>
 						</select>
 						
-						<select id="selectPickupMonth">
+						<select name="PickupMonth" id="selectPickupMonth">
 							<option value='Month'>Month</option>
 							<option value="01">01</option>
 							<option value="02">02</option>
@@ -91,7 +91,7 @@
 							<option value="12">12</option>
 						</select>
 					
-						<select id="selectPickupDay">
+						<select name="PickupDay" id="selectPickupDay">
 							<option value='Day'>Day</option>
 							<option value='01'>01</option>
 							<option value='02'>02</option>
@@ -126,7 +126,7 @@
 							<option value='31'>31</option>
 						</select>
 						
-						<select id="selectPickupTime">
+						<select name="PickupTime" id="selectPickupTime">
 							<option value='Time'>Time</option>
 							<option value="08:00">08:00</option>
 							<option value="10:00">10:00</option>
@@ -146,7 +146,7 @@
 
 					<div class="controls">
 					
-						<select id="selectCarYear">
+						<select name="Year" id="selectCarYear">
 						
 						<?php
 						
@@ -166,14 +166,14 @@
 					
 					<div class="controls">
 					
-						<select id="selectReturnYear">
+						<select name="ReturnYear" id="selectReturnYear">
 							<option value="Year">Year</option>
 							<option value="2012">2012</option>
 							<option value="2013">2013</option>
 							<option value="2014">2014</option>
 						</select>
 						
-						<select id="selectReturnMonth">
+						<select name="ReturnMonth" id="selectReturnMonth">
 							<option value='Month'>Month</option>
 							<option value="01">01</option>
 							<option value="02">02</option>
@@ -189,7 +189,7 @@
 							<option value="12">12</option>
 						</select>
 						
-						<select id="selectReturnDay">
+						<select name="ReturnDay" id="selectReturnDay">
 							<option value='Day'>Day</option>
 							<option value='01'>01</option>
 							<option value='02'>02</option>
@@ -224,7 +224,7 @@
 							<option value='31'>31</option>
 						</select>
 						
-						<select id="selectReturnTime">
+						<select name="ReturnTime" id="selectReturnTime">
 							<option value='Time'>Time</option>
 							<option value="08:00">08:00</option>
 							<option value="10:00">10:00</option>
@@ -240,9 +240,12 @@
 
 			</div>
 			
-			<div class="row-fluid form-actions span3">
+			<div class="row-fluid form-actions span2">
 				<button type="submit" class="btn btn-success" id="buttonRent">Rent!</button>
-				<button class="btn" onClick="load('php/rent.php')">Clear Form</button>
+			</div>
+			
+			<div class="row-fluid form-actions span2">
+				<a class="btn" href="#" onClick="clearRentForm()">Clear</a>
 			</div>
 			
 		</fieldset>
