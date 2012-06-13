@@ -17,29 +17,47 @@
 					<div class="controls">
 
 						<select id="selectCarBrand" onchange="get('php/carYears.php', this.value, 'selectCarYear')">
-						
-							<option value="Brand">Brand</option>
 							
 						<?php
 
 							$con = mysql_connect("localhost","root","zubur1");
-							
+								
 							if (!$con)
 								die('Could not connect: ' . mysql_error());
-
-							mysql_select_db("web", $con);
-
-							$query = "SELECT Brand, Model FROM cartype";
 							
-							$result = mysql_query($query);
-
-							while ($row = mysql_fetch_array($result)){
+							mysql_select_db("web", $con);							
 							
-								echo "<option value=\"Brand=" . $row['Brand'] . "&Model=" . $row['Model'] . "\">" . $row['Brand'] . " " . $row['Model'] . "</option>";
+							$year = '';
+							
+							if (!isset($_GET['car'])){
+
+								$query = "SELECT Brand, Model FROM cartype";
+								
+								$result = mysql_query($query);
+
+								echo "<option value=\"Brand\">Brand</option>";
+								
+								while ($row = mysql_fetch_array($result)){
+								
+									echo "<option value=\"Brand=" . $row['Brand'] . "&Model=" . $row['Model'] . "\">" . $row['Brand'] . " " . $row['Model'] . "</option>";
+								}
 							}
-						  
+							
+							else {
+							
+								$query = "SELECT * FROM cartype WHERE id ='" . $_GET['car'] . "'";
+								
+								$result = mysql_query($query);
+
+								if ($row = mysql_fetch_array($result)){
+								
+									echo "<option value=\"Brand=" . $row['Brand'] . "&Model=" . $row['Model'] . "\">" . $row['Brand'] . " " . $row['Model'] . "</option>";
+									
+									$year = $row['Year'];
+								}
+							}
+
 							mysql_close($con);
-	
 						?>
 
 						</select>
@@ -129,15 +147,17 @@
 					<div class="controls">
 					
 						<select id="selectCarYear">
-							<option value="Year">Year</option>
-							<!--
-							<option value="2012">2012</option>
-							<option value="2013">2011</option>
-							<option value="2014">2010</option>
-							<option value="2015">2009</option>
-							<option value="2016">2008</option>
-							<option value="2017">2007</option>
-							-->
+						
+						<?php
+						
+							if (!isset($_GET['car']))
+								echo "<option value=\"Year\">Year</option>";
+								
+							else
+								echo "<option value=\"" . $year . "\">" . $year . "</option>";
+
+						?>
+							
 						</select>
 						
 					</div>
