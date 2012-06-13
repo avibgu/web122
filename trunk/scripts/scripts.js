@@ -250,46 +250,88 @@ function validateAndSendContactForm()
 
 function validateRegForm()
 {
+	var isValid = validateAllForm();
+	if (isValid){
+		var fields = new Array("inputID","inputFirstName","inputLastName","inputAddress","inputCity","inputZipCode","inputPhone","inputEmail","inputPassword",
+		"inputRetypePassword","inputLicenseNo","inputLicenseNo","selectYear","selectMonth","selectDay","selectYearBirth","selectMonthBirth",
+		"selectDayBirth");
+		var i, values;
+		values = fields[0] + "=" + document.getElementById(fields[0]).value;
+		for (i=1; i<fields.length; i++){
+			var input = document.getElementById(fields[i]).value;
+			values =  values + "&" + fields[i] + "=" + input;
+		}
+		post('php/regForm.php', values, 'mainDiv');
+	}
+}
+
+function validateAllForm()
+{
+	var res = true;
 	var x = document.getElementById("inputID");
-	if (x.value=="" || x.value.length!=9)
+	if (x.value=="" || x.value.length!=9){
 		x.style.backgroundColor = "#FF5050";
+		res = false;
+	}
 	x = document.getElementById("inputFirstName");
-	if (x.value=="" || IsNumeric(x.value))
+	if (x.value=="" || IsNumeric(x.value)){
 		x.style.backgroundColor = "#FF5050";
+		res = false;
+	}
 	x = document.getElementById("inputLastName");
-	if (x.value=="" || IsNumeric(x.value))
+	if (x.value=="" || IsNumeric(x.value)){
 		x.style.backgroundColor = "#FF5050";
+		res = false;
+	}
 	x = document.getElementById("inputAddress");
-	if (x.value=="")
+	if (x.value==""){
 		x.style.backgroundColor = "#FF5050";
+		res = false;
+	}
 	x = document.getElementById("inputCity");
-	if (x.value=="")
+	if (x.value==""){
 		x.style.backgroundColor = "#FF5050";
+		res = false;
+	}
 	x = document.getElementById("inputZipCode");
-	if (!IsNumeric(x.value))
+	if (!IsNumeric(x.value)){
 		x.style.backgroundColor = "#FF5050";
+		res = false;
+	}
 	x = document.getElementById("inputPhone");
-	if (x.value=="" || !IsNumeric(x.value) || x.value.length < 6 || x.value.length > 10)
+	if (x.value=="" || !IsNumeric(x.value) || x.value.length < 6 || x.value.length > 10){
 		x.style.backgroundColor = "#FF5050";
+		res = false;
+	}
 	x = document.getElementById("inputEmail");
 	var atpos=x.value.indexOf("@");
 	var dotpos=x.value.lastIndexOf(".");
-	if (x.value=="" || atpos < 0 || dotpos < 0 || dotpos < atpos)
+	if (x.value=="" || atpos < 0 || dotpos < 0 || dotpos < atpos){
 		x.style.backgroundColor = "#FF5050";
+		res = false;
+	}
 	x = document.getElementById("inputPassword");
-	if (x.value.length > 3 || x.value.length < 13){
+	if (x.value.length < 4 || x.value.length > 12){
 		alert("Password length 4-12");
 		x.style.backgroundColor = "#FF5050";
+		res = false;
 	}
 	var passRetype = document.getElementById("inputRetypePassword");
-	if (x.value != passRetype.value)
+	if (x.value != passRetype.value){
 		passRetype.style.backgroundColor = "#FF5050";
+		res = false;
+	}
 	x = document.getElementById("inputLicenseNo");
-	if (x.value=="" || !IsNumeric(x.value))
+	if (x.value=="" || !IsNumeric(x.value)){
 		x.style.backgroundColor = "#FF5050";
+		res = false;
+	}
 	x = document.getElementById("checkboxAgree");
-	if (x.value.checked != true)
+	if (x.checked != true){
 		alert("Must Agree To Terms");
+		res = false;
+	}
+	return res;
 		
 }
 
