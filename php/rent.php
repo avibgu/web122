@@ -4,7 +4,8 @@
 
 	<br/>
 	
-	<form name="rentForm" class="form" method="post" onsubmit="validateRentForm()">
+	<!--<form name="rentForm" class="form" action="php/rentForm.php" onsubmit="return validateAndSendRentForm()" method="post">-->
+	<form name="rentForm" class="form">
 
 		<fieldset>
 
@@ -240,12 +241,10 @@
 
 			</div>
 			
-			<div class="row-fluid form-actions span2">
-				<button type="submit" class="btn btn-success" id="buttonRent">Rent!</button>
-			</div>
-			
-			<div class="row-fluid form-actions span2">
-				<a class="btn" href="#" onClick="clearRentForm()">Clear</a>
+			<div class="row-fluid form-actions span5">
+				<!-- <input class="btn btn-success" type="submit" value="Rent !"/> -->
+				<a class="btn btn-success" href="#" onClick="validateAndSendRentForm()">Rent !</a>
+				<a class="btn" href="#" onClick="load('php/rent.php')">Clear</a>
 			</div>
 			
 		</fieldset>
