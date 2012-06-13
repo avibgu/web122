@@ -65,7 +65,7 @@ CREATE TABLE `cartype` (
   `Year` year(4) NOT NULL,
   `Description` text,
   `Attributes` text,
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`,`Brand`,`Model`,`Year`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -78,6 +78,33 @@ LOCK TABLES `cartype` WRITE;
 /*!40000 ALTER TABLE `cartype` DISABLE KEYS */;
 INSERT INTO `cartype` VALUES (1,'Mazda','3',2012,'Mazda 3 breaks new boundaries in the design of compact cars, with a sporty design and advanced technologies.\n			A reliable car, equipped and provides an impressive driving experience in relation to its competitors.','Air Conditioning\n, Seats - 5, \nGear - Automatic\nLuggage Room - 1, Luggage'),(2,'Mazda','5',2012,'Mazda 5 is among the most successful cars 7 seats in the country, thanks to sophisticated design and attractiveness\n Intreducing modern family car, spacious and with excellent performance and proven reliability. ','Air Conditioning, Seats - 7, Gear - Automatic, Luggage Room - 4 Luggage'),(3,'Mazda','6',2012,'Mazda 6 car for the family  able to capture the Israeli audience by designing sporty and successful conduct\n road is excellent, quality materials and assembly among the highest compared to price and market.','Air Conditioning, Seats - 5, Gear - Manual \\ Automatic, Luggage Room - 2 Luggage'),(4,'Chevrolet','Spark',2012,'Spark simplicity and advantage: small dimensions, small efficient engines, manual gearbox.\n Compared to others\' Spark presents 1.2 engine, safety accessories, and provides comfort.','Air Conditioning, Seats - 5, Gear - Manual, Luggage Room - 1 Luggage'),(5,'Peugeot','107',2012,'Peugeot 107 is a mini car most desired for it\'s cost savings. The model has a young design, dynamic, and\n improvements accessories and fuel consumption.','Air Conditioning, Seats - 5, Gear - Manual, Luggage Room - 1 Luggage'),(6,'Kia','Carnival',2012,'Kia Carnival offers a spacious cabin (also for 7 people) and equipped with a rich manner. Good ride comfort.\n A full-size minivan, improved and spacious with elegant looks.','Air Conditioning, Seats - 6, Gear - Automatic, Luggage Room - 3 Luggage'),(7,'Citroen','Berlingo',2012,'Citroen\'s van with high level of design and safety overmost van vhiacles. the new Berlingo provides \n			Diesel engine, manual transmission and Reliability.','Air Conditioning, Seats - 8, Gear - Automatic, Luggage Room - 3 Luggage');
 /*!40000 ALTER TABLE `cartype` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `contact`
+--
+
+DROP TABLE IF EXISTS `contact`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `contact` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `FullName` varchar(45) NOT NULL,
+  `Phone` decimal(10,0) DEFAULT NULL,
+  `EMail` varchar(45) NOT NULL,
+  `Details` text NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `contact`
+--
+
+LOCK TABLES `contact` WRITE;
+/*!40000 ALTER TABLE `contact` DISABLE KEYS */;
+INSERT INTO `contact` VALUES (1,'Avi',0,'e','vbla..');
+/*!40000 ALTER TABLE `contact` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -172,7 +199,7 @@ CREATE TABLE `lease` (
   CONSTRAINT `CarIdFK` FOREIGN KEY (`CarId`) REFERENCES `car` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `CustomerIdFK` FOREIGN KEY (`CustomerId`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `EmployeeIdFK` FOREIGN KEY (`EmployeeId`) REFERENCES `employee` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,6 +208,7 @@ CREATE TABLE `lease` (
 
 LOCK TABLES `lease` WRITE;
 /*!40000 ALTER TABLE `lease` DISABLE KEYS */;
+INSERT INTO `lease` VALUES (1,1,1,'2012-04-02','16:00:00','2014-02-04','14:00:00',1,200,''),(1,1,1,'2014-04-04','14:00:00','2013-02-03','14:00:00',3,200,'Approved'),(1,1,1,'2014-05-04','16:00:00','2014-01-03','18:00:00',2,200,'Approved');
 /*!40000 ALTER TABLE `lease` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -219,4 +247,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-06-13  1:26:49
+-- Dump completed on 2012-06-13 21:18:46
