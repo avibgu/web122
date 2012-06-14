@@ -396,7 +396,25 @@ function validateAndSendSubscriptionForm()
 		return false;
 	}
 	
-	var content = "&selected=" + selected + "&existed=" + existed;
+	var content = "selected=" + selected + "&existed=" + existed;
+	
+	post('php/subscriptionForm.php', content, 'mainDiv');
+}
+
+function validateAndSendDeleteSubscriptionForm()
+{
+	var form = document.forms["subscriptionsForm"];
+
+	var existed = form["existed"].value; 
+
+	var username = getCookie("username");
+	
+	if (null == username || "" == username){
+		alert("you should be logged-in in order to order subscription !");
+		return false;
+	}
+	
+	var content = "selected=" + 0 + "&existed=" + existed;
 	
 	post('php/subscriptionForm.php', content, 'mainDiv');
 }

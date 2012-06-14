@@ -100,8 +100,11 @@
 
 			echo "<input type=\"hidden\" name=\"existed\" value=\"" . $existedSuscription . "\"/>";
 			
-			if (0 != $existedSuscription)
-				echo "<a class=\"btn btn-success\" href=\"#\" onClick=\"validateAndSendSubscriptionForm()\">Update</a>";
+			if (0 != $existedSuscription){
+				echo "<a class=\"btn btn-warning\" href=\"#\" onClick=\"validateAndSendSubscriptionForm()\">Update</a>";
+				echo "   ";
+				echo "<a class=\"btn btn-danger\" href=\"#\" onClick=\"validateAndSendDeleteSubscriptionForm()\">Delete</a>";
+			}
 		
 			else
 				echo "<a class=\"btn btn-success\" href=\"#\" onClick=\"validateAndSendSubscriptionForm()\">Order</a>";
