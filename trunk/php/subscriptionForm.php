@@ -10,8 +10,14 @@
 
 	mysql_select_db("web", $con);
 
-	$query =	"UPDATE customer SET SubscriptionTypeId = '" . $selected .
-				"' WHERE Username = '" . $_COOKIE['username'] . "'";
+	if (0 == $selected)
+		$selected = "null";
+		
+	else
+		$selected = "'" . $selected . "'";
+	
+	$query =	"UPDATE customer SET SubscriptionTypeId = " . $selected .
+				" WHERE Username = '" . $_COOKIE['username'] . "'";
 	
 	if (!mysql_query($query)){
 
