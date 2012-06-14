@@ -11,44 +11,81 @@
 		<br/>
 	</p>
 	
+<?php
+
+			$con = mysql_connect("localhost","root","zubur1");
+			
+			if (!$con)
+				die('Could not connect: ' . mysql_error());
+
+			mysql_select_db("web", $con);
+				
+			$existedSuscription = 0;
+			
+			if (isset($_COOKIE['username'])){
+			
+				$username = $_COOKIE['username'];
+			
+				$query = "SELECT SubscriptionTypeId FROM customer WHERE Username = '" . $username . "'";
+			
+				$result = mysql_query($query);
+				
+				if($row = mysql_fetch_array($result))
+					if (0 != $row['SubscriptionTypeId'] || "" != $row['SubscriptionTypeId'])
+						$existedSuscription = $row['SubscriptionTypeId'];
+			
+				if (0 != $existedSuscription)
+					echo "<p>You Already have a subscription, you can choose other one from the list below:</p>";
+			}
+
+?>
+	
+	
+	
 	<div class="divtable">
+		
+		<form name="subscriptionsForm" class="form">
 		
 		<table class="table" id="price-t">
 			
 			<thead>
 				<tr>
+					<th></th>
 					<th>Subscription type</th>
-					<th>none</th>
-					<th>Basic</th>
-					<th>Custom</th>
+					<th>Payment</th>
+					<th>Per day</th>
+					<th>Per hour</th>
 				</tr>
 			</thead>
 			
 			<tbody>
-				<tr>
-					<td>Payment</td>
-					<td>199 NIS</td>
-					<td>159 NIS</td>
-					<td>125 NIS</td>
-				</tr>
-				<tr>
-					<td>Per day</td>
-					<td>199 NIS</td>
-					<td>159 NIS</td>
-					<td>125 NIS</td>
-				</tr>
-				<tr>
-					<td>Per hour</td>
-					<td>59 NIS</td>
-					<td>49 NIS</td>
-					<td>42 NIS</td>
-				</tr>
-				<tr>
-					<td>Additions</td>
-					<td>0</td>
-					<td>0</td>
-					<td>0</td>
-				</tr>
+			
+<?php
+
+			$query = "SELECT * FROM subscriptiontype";
+			
+			$result = mysql_query($query);
+			
+			while($row = mysql_fetch_array($result)){
+			
+				echo "<tr>";
+				
+				if ($existedSuscription == $row['Id'])
+					echo "	<td><input type=\"radio\" name=\"selected\" value=\"" . $row['Id'] . "\" checked/></td>";
+				
+				else
+					echo "	<td><input type=\"radio\" name=\"selected\" value=\"" . $row['Id'] . "\" /></td>";
+					
+				echo "	<td>" . $row['Name'] . "</td>";
+				echo "	<td>" . $row['Payment'] . " NIS</td>";
+				echo "	<td>" . $row['PerDay'] . " NIS</td>";
+				echo "	<td>" . $row['PerHour'] . " NIS</td>";
+				echo "</tr>";
+			}
+			
+			mysql_close($con);
+?>
+
 			</tbody>
 		</table>
 		
@@ -59,9 +96,20 @@
 		<p>*Prices tex included.<br/></p>
 		
 		<p>
-			<a href="#" onClick="load('php/rent.php')">Click to order a subscription</a> or <a href="#" onClick="load('php/contact.php')">contact us.</a>
-		</p>
+<?php
+
+			echo "<input type=\"hidden\" name=\"existed\" value=\"" . $existedSuscription . "\"/>";
+			
+			if (0 != $existedSuscription)
+				echo "<a class=\"btn btn-success\" href=\"#\" onClick=\"validateAndSendSubscriptionForm()\">Update</a>";
 		
+			else
+				echo "<a class=\"btn btn-success\" href=\"#\" onClick=\"validateAndSendSubscriptionForm()\">Order</a>";
+?>	
+			 or <a href="#" onClick="load('php/contact.php')">contact us.</a>
+		</p>
+
+		</form>
 	</div>
 
 </div>

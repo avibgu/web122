@@ -71,4 +71,5 @@
 
 	}
 	
+	mysql_close($con);
 ?>
