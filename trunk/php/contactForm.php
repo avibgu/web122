@@ -42,4 +42,5 @@
 
 	}
 
+	mysql_close($con);
 ?>

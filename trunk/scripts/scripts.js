@@ -214,7 +214,6 @@ function getCookie(c_name)
 
 function validateAndSendContactForm()
 {
-	
 	var form = document.forms["contactForm"];
 	
 	var name = form["name"].value;
@@ -364,4 +363,36 @@ function clearRegForm()
 		input.style.backgroundColor = "#FFFFFF";
 	}
 	document.getElementById("checkboxAgree").checked = false;*/
+}
+
+function validateAndSendSubscriptionForm()
+{	
+	var form = document.forms["subscriptionsForm"];
+
+	var selected = form["selected"].value;
+	
+	if (null == selected || "" == selected) {
+	
+		alert("You haven't selected any subscription !");
+		return false;
+	}
+	
+	var existed = form["existedSuscription"].value; 
+	
+	if (existed == selected) {
+	
+		alert("You alreay have this subscription !");
+		return false;
+	}
+	
+	var username = getCookie("username");
+	
+	if (null == username || "" == username){
+		alert("you should be logged-in in order to order subscription!");
+		return false;
+	}
+	
+	var content = "&selected=" + selected + "&existed=" + existed;
+	
+	post('php/subscriptionForm.php', content, 'mainDiv');
 }
