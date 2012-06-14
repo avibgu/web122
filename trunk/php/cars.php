@@ -14,12 +14,7 @@
 
 <?php
 
-	$con = mysql_connect("localhost","root","zubur1");
-	
-	if (!$con)
-		die('Could not connect: ' . mysql_error());
-
-	mysql_select_db("web", $con);
+	require 'php/conn.php';
 
 	$query = "SELECT * FROM cartype";
 	
