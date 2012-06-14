@@ -2,6 +2,8 @@
 
 <?php
 
+	require 'php/db.php';
+
 	$username = "";
 	$loginError = "OK";
 
