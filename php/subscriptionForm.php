@@ -10,7 +10,7 @@
 
 	mysql_select_db("web", $con);
 
-	$query =	"UPDATE customer SET SubscriptioTypeId = '" . $selected .
+	$query =	"UPDATE customer SET SubscriptionTypeId = '" . $selected .
 				"' WHERE Username = '" . $_COOKIE['username'] . "'";
 	
 	if (!mysql_query($query)){
