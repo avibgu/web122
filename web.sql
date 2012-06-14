@@ -94,7 +94,7 @@ CREATE TABLE `contact` (
   `EMail` varchar(45) NOT NULL,
   `Details` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -103,7 +103,7 @@ CREATE TABLE `contact` (
 
 LOCK TABLES `contact` WRITE;
 /*!40000 ALTER TABLE `contact` DISABLE KEYS */;
-INSERT INTO `contact` VALUES (1,'Avi',0,'e','vbla..');
+INSERT INTO `contact` VALUES (1,'Avi',0,'e','vbla..'),(2,'a',0,'e',' e');
 /*!40000 ALTER TABLE `contact` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -122,7 +122,7 @@ CREATE TABLE `customer` (
   `Password` varchar(45) NOT NULL,
   `Email` varchar(45) NOT NULL,
   `CreditCardNum` decimal(16,0) NOT NULL,
-  `SubscriptionTypeId` int(11) NOT NULL,
+  `SubscriptionTypeId` int(11) DEFAULT NULL,
   `RegistrationDate` date NOT NULL,
   `LicenseId` int(9) NOT NULL,
   PRIMARY KEY (`id`),
@@ -140,7 +140,7 @@ CREATE TABLE `customer` (
 
 LOCK TABLES `customer` WRITE;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
-INSERT INTO `customer` VALUES (1,'asaf','m','asafm','12345','asafm@mail.com',1234567812345678,1,'2012-06-12',12345678);
+INSERT INTO `customer` VALUES (1,'asaf','m','asafm','12345','asafm@mail.com',1234567812345678,NULL,'2012-06-12',12345678);
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -199,7 +199,7 @@ CREATE TABLE `lease` (
   CONSTRAINT `CarIdFK` FOREIGN KEY (`CarId`) REFERENCES `car` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `CustomerIdFK` FOREIGN KEY (`CustomerId`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `EmployeeIdFK` FOREIGN KEY (`EmployeeId`) REFERENCES `employee` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -208,7 +208,7 @@ CREATE TABLE `lease` (
 
 LOCK TABLES `lease` WRITE;
 /*!40000 ALTER TABLE `lease` DISABLE KEYS */;
-INSERT INTO `lease` VALUES (1,1,1,'2012-04-02','16:00:00','2014-02-04','14:00:00',1,200,''),(1,1,1,'2014-04-04','14:00:00','2013-02-03','14:00:00',3,200,'Approved'),(1,1,1,'2014-05-04','16:00:00','2014-01-03','18:00:00',2,200,'Approved');
+INSERT INTO `lease` VALUES (1,1,1,'2012-01-01','08:00:00','2014-02-03','12:00:00',6,200,'Approved'),(1,1,1,'2012-02-06','14:00:00','2013-05-05','12:00:00',4,200,'Approved'),(1,1,1,'2012-04-02','16:00:00','2014-02-04','14:00:00',1,200,''),(1,1,1,'2014-04-04','14:00:00','2013-02-03','14:00:00',3,200,'Approved'),(1,1,1,'2014-05-04','16:00:00','2014-01-03','18:00:00',2,200,'Approved');
 /*!40000 ALTER TABLE `lease` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,8 +221,10 @@ DROP TABLE IF EXISTS `subscriptiontype`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `subscriptiontype` (
   `Id` int(11) NOT NULL,
-  `DiscountPerDay` int(11) NOT NULL,
-  `DiscountPerHour` int(11) NOT NULL,
+  `Name` varchar(45) NOT NULL,
+  `PerDay` int(11) NOT NULL,
+  `PerHour` int(11) NOT NULL,
+  `Payment` int(11) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Id_UNIQUE` (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -234,7 +236,7 @@ CREATE TABLE `subscriptiontype` (
 
 LOCK TABLES `subscriptiontype` WRITE;
 /*!40000 ALTER TABLE `subscriptiontype` DISABLE KEYS */;
-INSERT INTO `subscriptiontype` VALUES (1,0,0);
+INSERT INTO `subscriptiontype` VALUES (1,'None',199,59,0),(2,'Basic',159,49,125),(3,'Custom',125,42,159);
 /*!40000 ALTER TABLE `subscriptiontype` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -247,4 +249,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2012-06-13 21:18:46
+-- Dump completed on 2012-06-14 21:02:28
