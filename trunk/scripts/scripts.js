@@ -369,15 +369,19 @@ function validateAndSendSubscriptionForm()
 {	
 	var form = document.forms["subscriptionsForm"];
 
-	var selected = form["selected"].value;
-	
-	if (null == selected || "" == selected) {
+	var selected = 0;
+
+	for (var i = 0; i < document.subscriptionsForm.selected.length; i++)
+		if (document.subscriptionsForm.selected[i].checked)
+			selected = document.subscriptionsForm.selected[i].value;
+
+	if (0 == selected) {
 	
 		alert("You haven't selected any subscription !");
 		return false;
 	}
 	
-	var existed = form["existedSuscription"].value; 
+	var existed = form["existed"].value; 
 	
 	if (existed == selected) {
 	
@@ -388,7 +392,7 @@ function validateAndSendSubscriptionForm()
 	var username = getCookie("username");
 	
 	if (null == username || "" == username){
-		alert("you should be logged-in in order to order subscription!");
+		alert("you should be logged-in in order to order subscription !");
 		return false;
 	}
 	
