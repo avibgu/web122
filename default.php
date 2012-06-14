@@ -9,12 +9,7 @@
 
 	if (isset($_POST['usernameInput']) && isset($_POST['passwordInput'])) {
 
-		$con = mysql_connect("localhost","root","zubur1");
-		
-		if (!$con)
-			die('Could not connect: ' . mysql_error());
-
-		mysql_select_db("web", $con);
+		require 'php/php/conn.php';
 
 		$query = "SELECT * FROM customer WHERE Username = '" . $_POST['usernameInput']
 					. "' AND Password = '" . $_POST['passwordInput'] . "'";

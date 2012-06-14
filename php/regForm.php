@@ -1,11 +1,6 @@
 <?php
 
-	$con = mysql_connect("localhost","root","");
-
-	if (!$con)
-		die('Could not connect: ' . mysql_error());
-
-	mysql_select_db("web", $con);
+	require 'php/conn.php';
 
 	$query = "SELECT * FROM customer WHERE id = " . $_POST['inputID'];// AND Model = '" . $_GET['Model'] . "'";
 
