@@ -264,6 +264,25 @@ function validateRegForm()
 	}
 }
 
+function validateUpdateForm()
+{
+	var isValid = validateAllForm();
+	if (isValid){
+		var fields = new Array("inputID","inputFirstName","inputLastName","inputAddress","inputCity","inputZipCode","inputPhone","inputEmail","inputPassword",
+		"inputRetypePassword","inputLicenseNo","inputLicenseNo","selectYear","selectMonth","selectDay","selectYearBirth","selectMonthBirth",
+		"selectDayBirth");
+		var i, values;
+		values = fields[0] + "=" + document.getElementById(fields[0]).value;
+		for (i=1; i<fields.length; i++){
+			var input = document.getElementById(fields[i]).value;
+			values =  values + "&" + fields[i] + "=" + input;
+		}
+		values = values + "&reqType=update";
+		post('php/regForm.php', values, 'mainDiv');
+	}
+}
+
+
 function validateAllForm()
 {
 	var res = true;
@@ -417,4 +436,13 @@ function validateAndSendDeleteSubscriptionForm()
 	var content = "selected=" + 0 + "&existed=" + existed;
 	
 	post('php/subscriptionForm.php', content, 'mainDiv');
+}
+
+function checkCookie()
+{
+	var username = getCookie("username");
+	if (null != username && "" != username)
+		alert("you logged-in  !");
+
+	
 }

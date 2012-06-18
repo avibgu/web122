@@ -1,5 +1,4 @@
 <div class="hero-unit">
-   
 	<form class="form-horizontal">
 		<fieldset>
 			
@@ -216,7 +215,16 @@
 				</div>
 	
 				<div class="form-actions">
-					<button type="submit" class="btn btn-primary" id="buttonRegister" onclick="validateRegForm()">Register</button>
+				<?php
+				if (isset($_COOKIE['username']) == false)
+				{
+					echo "<button type=\"submit\" class=\"btn btn-primary\" id=\"buttonRegister\" onclick=\"validateRegForm()\">Register</button>";
+				}
+				else
+				{
+					echo "<button type=\"submit\" class=\"btn btn-primary\" id=\"buttonRegister\" onclick=\"validateUpdateForm()\">Update</button>";
+				}
+				?>
 					<button class="btn" id="buttonClearForm" onclick="clearRegForm()">Clear Form</button>
 				</div>
 			
