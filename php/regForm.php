@@ -2,14 +2,22 @@
 
 	require 'php/conn.php';
 
-	$query = "SELECT * FROM customer WHERE id = " . $_POST['inputID'];// AND Model = '" . $_GET['Model'] . "'";
+	$query = "SELECT * FROM customer WHERE id = " . $_POST['inputID'];
 
 	$result = mysql_query($query);
 	
 	if (mysql_num_rows($result) > 0)
-		echo "<p> ID is already registerd</p>";
+		if (isset($_POST['reqType'])){
+			$query = "UPDATE customer SET UserName='" . $_POST['inputEmail'] ."',Email='" . $_POST['inputEmail'] . "',LicenseId='"
+			. $_POST['inputLicenseNo']. "' WHERE id='" . $_POST['inputID'] . "'";
+			echo $query;
+			mysql_query($query);
+			echo "<p> Detailes Updated!</p>";
+		}
+		else
+			echo "<p> ID is already registerd</p>";
 	else{
-		$query = "SELECT * FROM customer WHERE Username Like '" . $_POST['inputEmail'] . "'";// AND Model = '" . $_GET['Model'] . "'";
+		$query = "SELECT * FROM customer WHERE Username Like '" . $_POST['inputEmail'] . "'";
 		$result = mysql_query($query);
 		if (mysql_num_rows($result) > 0)
 			echo "<p> User Name is already exists</p>";
@@ -24,5 +32,6 @@
 	}
 
 	mysql_close($con);
+	
 
 ?>
