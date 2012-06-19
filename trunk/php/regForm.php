@@ -10,8 +10,7 @@
 		if (isset($_POST['reqType'])){
 			$query = "UPDATE customer SET UserName='" . $_POST['inputEmail'] ."',Email='" . $_POST['inputEmail'] . "',LicenseId='"
 			. $_POST['inputLicenseNo']. "' WHERE id='" . $_POST['inputID'] . "'";
-			echo $query;
-			mysql_query($query);
+			mysql_query($query) or die ("Invalid insert " . mysql_error());
 			echo "<p> Detailes Updated!</p>";
 		}
 		else
@@ -25,7 +24,7 @@
 			$query = "insert into customer values (" . $_POST['inputID'] . ",'" . $_POST['inputFirstName'] . "','" . $_POST['inputLastName'] 
 				. "','" . $_POST['inputEmail'] . "','" . $_POST['inputPassword'] . "','" . $_POST['inputEmail'] . "'," . 0 . "," . 1 . ",'" . date("y-m-d H:i:s")
 				. "'," . $_POST['inputLicenseNo'] . ")";	
-			echo "<p> Registration Successful </p><br/><p>" . $query . "</p>";				
+			echo "<p> Registration Successful </p><br/>";				
 			mysql_query($query) or die ("Invalid insert " . mysql_error());
 			
 		}
