@@ -23,8 +23,8 @@
 			echo "<p> User Name is already exists</p>";
 		else {
 			$query = "insert into customer values (" . $_POST['inputID'] . ",'" . $_POST['inputFirstName'] . "','" . $_POST['inputLastName'] 
-				. "','" . $_POST['inputEmail'] . "','" . $_POST['inputPassword'] . "','" . $_POST['inputEmail'] . "'," . 0 . "," . 1 . "," . date("y-m-d")
-				. "," . $_POST['inputLicenseNo'] . ")";	
+				. "','" . $_POST['inputEmail'] . "','" . $_POST['inputPassword'] . "','" . $_POST['inputEmail'] . "'," . 0 . "," . 1 . ",'" . date("y-m-d H:i:s")
+				. "'," . $_POST['inputLicenseNo'] . ")";	
 			echo "<p> Registration Successful </p><br/><p>" . $query . "</p>";				
 			mysql_query($query) or die ("Invalid insert " . mysql_error());
 			
