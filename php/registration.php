@@ -123,6 +123,10 @@
 				<div class="controls">
 					<input class="input-xlarge" type="email" id="inputEmail" placeholder="Email"/>
 				</div>
+				<label> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp 
+						&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp This Will Be Your UserName</label>
 				
 				<label class="control-label" for="inputPassword">Password</label>
 				<div class="controls">
