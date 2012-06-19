@@ -215,17 +215,18 @@
 				</div>
 	
 				<div class="form-actions">
+					
 				<?php
 				if (isset($_COOKIE['username']) == false)
 				{
-					echo "<button type=\"submit\" class=\"btn btn-primary\" id=\"buttonRegister\" onclick=\"validateRegForm()\">Register</button>";
+					echo "<a class=\"btn btn-primary\" href=\"#\" id=\"buttonRegister\" onClick=\"validateRegForm()\">Register</a>";
 				}
 				else
 				{
-					echo "<button type=\"submit\" class=\"btn btn-primary\" id=\"buttonRegister\" onclick=\"validateUpdateForm()\">Update</button>";
+					echo "<a class=\"btn btn-primary\" href=\"#\" id=\"buttonUpdate\" onClick=\"validateUpdateForm()\">Update</a>";
 				}
 				?>
-					<button class="btn" id="buttonClearForm" onclick="clearRegForm()">Clear Form</button>
+					<a class="btn" href="#" onClick="clearRegForm()">Clear Form</a>
 				</div>
 			
 			</div>
