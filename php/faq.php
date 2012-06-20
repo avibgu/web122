@@ -31,7 +31,7 @@
 
 		<ul>
 			<li><a href="#Q5">Is insurance included for all customers?</a></li>
-			<li><a href="#Q6">What types of insurence policies do i can?</a></li>
+			<li><a href="#Q6">What types of insurence policies do you offer?</a></li>
 		</ul>
 
 	</div><!--/span-->
@@ -120,7 +120,7 @@
 	<br/>
 	<br/>
 	
-	<p class="ques"><a name="Q6"> What types of insurence policies do i can? </a></p>
+	<p class="ques"><a name="Q6"> What types of insurence policies do you offer? </a></p>
 
 	<p>
 		TBD.
