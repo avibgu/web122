@@ -171,11 +171,6 @@ function validateAndSendRentForm()
 	
 	var username = getCookie("username");
 	
-	if (null == username || "" == username){
-		alert("you should be logged-in in order to Rent!");
-		return false;
-	}
-	
 	var PickupHours = PickupTime.split(":")[0];
 	var PickupMinutes = PickupTime.split(":")[1];
 	var PickupDate = new Date(PickupYear, PickupMonth, PickupDay, PickupHours, PickupMinutes, 0, 0);
@@ -195,6 +190,11 @@ function validateAndSendRentForm()
 					"&ReturnDay=" + ReturnDay + "&ReturnTime=" + ReturnTime;
 	
 	post('php/rentForm.php', content, 'mainDiv');
+	
+	/*if (null == username || "" == username){
+		alert("you should be logged-in in order to Rent!");
+		return false;
+	}*/
 }
 
 function getCookie(c_name)

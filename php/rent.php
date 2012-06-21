@@ -20,13 +20,21 @@
 						<select name="Brand" id="selectCarBrand" onchange="get('php/carYears.php', this.value, 'selectCarYear')">
 							
 						<?php
-
 							require 'php/conn.php';							
 							
 							$year = '';
 							
 							if (!isset($_GET['car'])){
-
+								if (isset($_GET['savedcookie'])){
+									foreach ($_COOKIE['rentdata'] as $name => $value)
+										setcookie("rentdata[".$name."]", '', time() - 3600);
+								}
+								$rentVars = array('Brand' => "", 'Model' =>"");										
+								if (!isset($_GET['savedcookie']) && isset($_COOKIE['rentdata'])){
+									foreach ($_COOKIE['rentdata'] as $name => $value)
+										$rentVars[$name] = $value;
+									$year = $rentVars['Year'];
+								}
 								$query = "SELECT Brand, Model FROM cartype";
 								
 								$result = mysql_query($query);
@@ -34,9 +42,12 @@
 								echo "<option value=\"Brand\">Brand</option>";
 								
 								while ($row = mysql_fetch_array($result)){
-								
-									echo "<option value=\"Brand=" . $row['Brand'] . "&Model=" . $row['Model'] . "\">" . $row['Brand'] . " " . $row['Model'] . "</option>";
+									if (($rentVars['Brand'] == $row['Brand']) && ($rentVars['Model'] == $row['Model']))
+										echo "<option value=\"Brand=" . $row['Brand'] . "&Model=" . $row['Model'] . "\" selected=\"selected\">" . $row['Brand'] . " " . $row['Model'] . "</option>";
+									else
+										echo "<option value=\"Brand=" . $row['Brand'] . "&Model=" . $row['Model'] . "\">" . $row['Brand'] . " " . $row['Model'] . "</option>";
 								}
+								
 							}
 							
 							else {
@@ -57,7 +68,6 @@
 						?>
 
 						</select>
-						
 					</div>
 					
 					<label class="control-label" >Pickup Date \ Time</label>
@@ -66,70 +76,50 @@
 
 						<select name="PickupYear" id="selectPickupYear">
 							<option value="Year">Year</option>
-							<option value="2012">2012</option>
-							<option value="2013">2013</option>
-							<option value="2014">2014</option>
-						</select>
+							<?php
+							for ($i = 2012; $i < 2015; $i++){
+								if ($rentVars['PickupYear'] == $i)
+									echo "<option value=" . $i . " selected=\"selected\">" . $i . "</option>";
+								else
+									echo "<option value=" . $i . ">" . $i . "</option>";
+							}
+							?>
+							</select>
 						
 						<select name="PickupMonth" id="selectPickupMonth">
 							<option value='Month'>Month</option>
-							<option value="01">01</option>
-							<option value="02">02</option>
-							<option value="03">03</option>
-							<option value="04">04</option>
-							<option value="05">05</option>
-							<option value="06">06</option>
-							<option value="07">07</option>
-							<option value="08">08</option>
-							<option value="09">09</option>
-							<option value="10">10</option>
-							<option value="11">11</option>
-							<option value="12">12</option>
+							<?php
+							for ($i = 1; $i < 13; $i++){
+								if ($rentVars['PickupMonth'] == $i)
+									echo "<option value=" . sprintf("%02d", $i) . " selected=\"selected\">" . sprintf("%02d", $i) . "</option>";
+								else
+									echo "<option value=" . sprintf("%02d", $i) . ">" . sprintf("%02d", $i) . "</option>";
+							}
+							?>
 						</select>
 					
 						<select name="PickupDay" id="selectPickupDay">
 							<option value='Day'>Day</option>
-							<option value='01'>01</option>
-							<option value='02'>02</option>
-							<option value='03'>03</option>
-							<option value='04'>04</option>
-							<option value='05'>05</option>
-							<option value='06'>06</option>
-							<option value='07'>07</option>
-							<option value='08'>08</option>
-							<option value='09'>09</option>
-							<option value='10'>10</option>
-							<option value='11'>11</option>
-							<option value='12'>12</option>
-							<option value='13'>13</option>
-							<option value='14'>14</option>
-							<option value='15'>15</option>
-							<option value='16'>16</option>
-							<option value='17'>17</option>
-							<option value='18'>18</option>
-							<option value='19'>19</option>
-							<option value='20'>20</option>
-							<option value='21'>21</option>
-							<option value='22'>22</option>
-							<option value='23'>23</option>
-							<option value='24'>24</option>
-							<option value='25'>25</option>
-							<option value='26'>26</option>
-							<option value='27'>27</option>
-							<option value='28'>28</option>
-							<option value='29'>29</option>
-							<option value='30'>30</option>
-							<option value='31'>31</option>
+							<?php
+							for ($i = 1; $i < 32; $i++){
+								if ($rentVars['PickupDay'] == $i)
+									echo "<option value=" . sprintf("%02d", $i) . " selected=\"selected\">" . sprintf("%02d", $i) . "</option>";
+								else
+									echo "<option value=" . sprintf("%02d", $i) . ">" . sprintf("%02d", $i) . "</option>";
+							}
+							?>
 						</select>
 						
 						<select name="PickupTime" id="selectPickupTime">
 							<option value='Time'>Time</option>
-							<option value="08:00">08:00</option>
-							<option value="10:00">10:00</option>
-							<option value="12:00">12:00</option>
-							<option value="14:00">14:00</option>
-							<option value="16:00">16:00</option>
-							<option value="18:00">18:00</option>
+							<?php
+							for ($i = 8; $i < 20; $i=$i+2){
+								if ($rentVars['PickupTime'] == sprintf("%02d:00", $i))
+									echo "<option value=" . sprintf("%02d:00", $i) . " selected=\"selected\">" . sprintf("%02d:00", $i) . "</option>";
+								else
+									echo "<option value=" . sprintf("%02d:00", $i) . ">" . sprintf("%02d:00", $i) . "</option>";
+							}
+							?>
 						</select>
 						
 					</div>
@@ -146,12 +136,16 @@
 						
 						<?php
 						
-							if (!isset($_GET['car']))
-								echo "<option value=\"Year\">Year</option>";
-								
-							else
+							if (isset($_GET['car']))
 								echo "<option value=\"" . $year . "\">" . $year . "</option>";
-
+								
+							else							
+								for ($i = 2012; $i < 2015; $i++){
+									if ($rentVars['Year'] == $i)
+										echo "<option value=" . $i . " selected=\"selected\">" . $i . "</option>";
+									else
+										echo "<option value=" . $i . ">" . $i . "</option>";
+								}							
 						?>
 							
 						</select>
@@ -164,70 +158,50 @@
 					
 						<select name="ReturnYear" id="selectReturnYear">
 							<option value="Year">Year</option>
-							<option value="2012">2012</option>
-							<option value="2013">2013</option>
-							<option value="2014">2014</option>
+							<?php
+								for ($i = 2012; $i < 2015; $i++){
+									if ($rentVars['ReturnYear'] == $i)
+										echo "<option value=" . $i . " selected=\"selected\">" . $i . "</option>";
+									else
+										echo "<option value=" . $i . ">" . $i . "</option>";
+								}						
+							?>
 						</select>
 						
 						<select name="ReturnMonth" id="selectReturnMonth">
 							<option value='Month'>Month</option>
-							<option value="01">01</option>
-							<option value="02">02</option>
-							<option value="03">03</option>
-							<option value="04">04</option>
-							<option value="05">05</option>
-							<option value="06">06</option>
-							<option value="07">07</option>
-							<option value="08">08</option>
-							<option value="09">09</option>
-							<option value="10">10</option>
-							<option value="11">11</option>
-							<option value="12">12</option>
+							<?php
+							for ($i = 1; $i < 13; $i++){
+								if ($rentVars['ReturnMonth'] == $i)
+									echo "<option value=" . sprintf("%02d", $i) . " selected=\"selected\">" . sprintf("%02d", $i) . "</option>";
+								else
+									echo "<option value=" . sprintf("%02d", $i) . ">" . sprintf("%02d", $i) . "</option>";
+							}
+							?>
 						</select>
 						
 						<select name="ReturnDay" id="selectReturnDay">
 							<option value='Day'>Day</option>
-							<option value='01'>01</option>
-							<option value='02'>02</option>
-							<option value='03'>03</option>
-							<option value='04'>04</option>
-							<option value='05'>05</option>
-							<option value='06'>06</option>
-							<option value='07'>07</option>
-							<option value='08'>08</option>
-							<option value='09'>09</option>
-							<option value='10'>10</option>
-							<option value='11'>11</option>
-							<option value='12'>12</option>
-							<option value='13'>13</option>
-							<option value='14'>14</option>
-							<option value='15'>15</option>
-							<option value='16'>16</option>
-							<option value='17'>17</option>
-							<option value='18'>18</option>
-							<option value='19'>19</option>
-							<option value='20'>20</option>
-							<option value='21'>21</option>
-							<option value='22'>22</option>
-							<option value='23'>23</option>
-							<option value='24'>24</option>
-							<option value='25'>25</option>
-							<option value='26'>26</option>
-							<option value='27'>27</option>
-							<option value='28'>28</option>
-							<option value='29'>29</option>
-							<option value='30'>30</option>
-							<option value='31'>31</option>
+							<?php
+							for ($i = 1; $i < 32; $i++){
+								if ($rentVars['ReturnDay'] == $i)
+									echo "<option value=" . sprintf("%02d", $i) . " selected=\"selected\">" . sprintf("%02d", $i) . "</option>";
+								else
+									echo "<option value=" . sprintf("%02d", $i) . ">" . sprintf("%02d", $i) . "</option>";
+							}
+							?>
 						</select>
 						
 						<select name="ReturnTime" id="selectReturnTime">
-							<option value='Time'>Time</option>
-							<option value="08:00">08:00</option>
-							<option value="10:00">10:00</option>
-							<option value="12:00">12:00</option>
-							<option value="14:00">14:00</option>
-							<option value="16:00">16:00</option>
-							<option value="18:00">18:00</option>
+						<option value='Time'>Time</option>
+							<?php
+							for ($i = 8; $i < 20; $i=$i+2){
+								if ($rentVars['ReturnTime'] == sprintf("%02d:00", $i))
+									echo "<option value=" . sprintf("%02d:00", $i) . " selected=\"selected\">" . sprintf("%02d:00", $i) . "</option>";
+								else
+									echo "<option value=" . sprintf("%02d:00", $i) . ">" . sprintf("%02d:00", $i) . "</option>";
+							}
+							?>
 						</select>
 						
 					</div>
@@ -239,11 +213,19 @@
 			<div class="row-fluid form-actions span5">
 				<!-- <input class="btn btn-success" type="submit" value="Rent !"/> -->
 				<a class="btn btn-success" href="#" onClick="validateAndSendRentForm()">Rent !</a>
-				<a class="btn" href="#" onClick="load('php/rent.php')">Clear</a>
+				<?php
+					if (isset($_COOKIE['rentdata'])){
+					?>
+					<a class="btn" href="#" onClick="loadWithParams('php/rent.php','savedcookie=true')">Clear</a>
+					<?php
+					}
+					else{
+					?>
+					<a class="btn" href="#" onClick="load('php/rent.php')">Clear</a>
+					<?php } ?>
 			</div>
 			
 		</fieldset>
 
 	</form>
-
 </div>
