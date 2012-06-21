@@ -1,5 +1,30 @@
 <?php
 
+	if (!isset($_COOKIE['username'])){//save rentdata user wanted
+		setcookie("rentdata[Brand]", $_POST['Brand'], time()+3600);
+		setcookie("rentdata[Model]", $_POST['Model'], time()+3600);
+		setcookie("rentdata[Year]", $_POST['Year'], time()+3600);
+		setcookie("rentdata[PickupYear]", $_POST['PickupYear'], time()+3600);
+		setcookie("rentdata[PickupMonth]", $_POST['PickupMonth'], time()+3600);
+		setcookie("rentdata[PickupDay]", $_POST['PickupDay'], time()+3600);
+		setcookie("rentdata[PickupTime]", $_POST['PickupTime'], time()+3600);
+		setcookie("rentdata[ReturnYear]", $_POST['ReturnYear'], time()+3600);
+		setcookie("rentdata[ReturnMonth]", $_POST['ReturnMonth'], time()+3600);
+		setcookie("rentdata[ReturnDay]", $_POST['ReturnDay'], time()+3600);
+		setcookie("rentdata[ReturnTime]", $_POST['ReturnTime'], time()+3600);
+	?>
+<div class="hero-unit">
+
+	<h3>You should be logged-in in order to Rent!</h3>
+	</br>
+	</br>
+	<a class="btn btn-warning" href="#" onClick="load('php/rent.php')">Back To Rent Page</a>
+	
+</div>
+<?php
+	}
+else
+{	
 	require 'php/conn.php';
 
 	$query =	"SELECT C.id " .
@@ -66,5 +91,10 @@
 
 	}
 	
+	if (isset($_COOKIE['rentdata'])){
+		foreach ($_COOKIE['rentdata'] as $name => $value)
+			setcookie("rentdata[".$name."]", '', time() - 3600);
+	}
 	mysql_close($con);
+}
 ?>
