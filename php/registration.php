@@ -204,6 +204,17 @@
 						<option value='31'>31</option>
 					</select>
 				</div>
+			
+				<label class="control-label" for="CreditCardNumber">Credit Card Number</label>
+				<div class="controls">
+					<input class="input-xlarge" type="text" id="CreditCardNumber" placeholder="Credit Card Number"/>
+				</div>
+				
+				<label class="control-label" for="CreditCardExpYear CreditCardExpMonth">Credit Card Number</label>
+				<div class="controls">
+					<input class="input-small" type="text" id="CreditCardExpMonth" placeholder="mm"/> &nbsp - &nbsp
+					<input class="input-small" type="text" id="CreditCardExpYear" placeholder="yyyy"/>
+				</div>
 				
 				<div class="controls">
 					<br/>
@@ -223,11 +234,11 @@
 				<?php
 				if (isset($_COOKIE['username']) == false)
 				{
-					echo "<a class=\"btn btn-primary\" href=\"#\" id=\"buttonRegister\" onClick=\"validateRegForm()\">Register</a>";
+					echo "<a class=\"btn btn-primary\" href=\"#\" id=\"buttonRegister\" onClick=\"validateRegForm('')\">Register</a>";
 				}
 				else
 				{
-					echo "<a class=\"btn btn-primary\" href=\"#\" id=\"buttonUpdate\" onClick=\"validateUpdateForm()\">Update</a>";
+					echo "<a class=\"btn btn-primary\" href=\"#\" id=\"buttonUpdate\" onClick=\"validateRegForm('update')\">Update</a>";
 				}
 				?>
 					<a class="btn" href="#" onClick="clearRegForm()">Clear Form</a>

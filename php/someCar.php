@@ -1,4 +1,13 @@
 <?php
+	
+if (isset($_COOKIE['username'])){//save reviewed cars (last 3 only)
+	if (!isset($_COOKIE["historycount"]))
+		setcookie("historycount", "0", time() + 3600);
+	$reviewedindex = $_COOKIE['historycount'] % 3 + 1;
+	setcookie("reviewed" . $reviewedindex, $_GET['car'], time()+3600, "\\", "localhost");
+	setcookie("historycount", $reviewedindex . "", time() + 3600);
+}
+
 
 require 'php/conn.php';
 
@@ -43,5 +52,5 @@ if ($row = mysql_fetch_array($result)){
 }
 
 mysql_close($con);
-	
+	print_r ($_COOKIE);
 ?>
