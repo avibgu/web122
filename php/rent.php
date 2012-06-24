@@ -51,13 +51,22 @@
 							}
 							
 							else {
-							
+								
 								$query = "SELECT * FROM cartype WHERE id ='" . $_GET['car'] . "'";
 								
 								$result = mysql_query($query);
 
 								if ($row = mysql_fetch_array($result)){
-								
+									
+									foreach ($_COOKIE['rentdata'] as $name => $value){
+										setcookie("rentdata[".$name."]", '', time() - 3600);
+										$rentVars[$name] = '';
+									}
+									$rentVars['Brand'] = $row['Brand'];
+									$rentVars['Model'] = $row['Model'];
+									setcookie("rentdata[Brand]", $row['Brand'], time() + 3600);
+									setcookie("rentdata[Model]", $row['Model'], time() + 3600);
+									
 									echo "<option value=\"Brand=" . $row['Brand'] . "&Model=" . $row['Model'] . "\">" . $row['Brand'] . " " . $row['Model'] . "</option>";
 									
 									$year = $row['Year'];
