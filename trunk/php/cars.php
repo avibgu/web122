@@ -14,6 +14,9 @@
 
 <?php
 
+	if (!isset($_COOKIE['historycount']))
+		setcookie("historycount", "0", time() + 3600);
+	
 	require 'php/conn.php';
 
 	$query = "SELECT * FROM cartype";

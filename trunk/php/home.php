@@ -12,7 +12,7 @@
 
 	<div class="span4">
 		<h2>Register</h2>
-		<p>Customer registration before placing an order, entering information with quick steps so you can enjoy the auto rentals services. <br/><br/><br/></p>
+		<p>Customer registration before placing an order, entering information with quick steps so you can enjoy the auto rentals services. <br/><br/><br/><br/></p>
 		<p><a class="btn" href="#" onClick="load('php/registration.php')">Free Registration &#187;</a></p>
 	</div><!--/span-->
 
@@ -25,7 +25,7 @@
 
 	<div class="span4">
 		<h2>Specials</h2>
-		<p>Amazing sales and special member offers. Take it while it's hot..<br/><br/><br/><br/></p>
+		<p>Amazing sales and special member offers. Take it while it's hot..<br/><br/><br/><br/><br/></p>
 		<p><a class="btn" href="#" onClick="load('php/specials.php')">View Offers &#187;</a></p>
 	</div><!--/span-->
 

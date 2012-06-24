@@ -4,7 +4,6 @@
 	<h1>Recently Reviewed</h1>
 	<br/>
 	<?php 
-	print_r ($_COOKIE);
 	if (!isset($_COOKIE['reviewed1']))
 	{
 	?>
@@ -15,7 +14,7 @@
 	<?php
 	}
 	else
-		echo "<h3> Hello" . $_COOKIE['username'] . " - Recent cars you reviewed</h3>";
+		echo "<h3> Hello " . $_COOKIE['username'] . " - Recent cars you reviewed</h3>";
 	?>
 </div>
 
@@ -30,12 +29,10 @@ if (isset($_COOKIE['reviewed1']))
 
 
 	echo "<div class=\"row-fluid\">";
-
-	for ($i = 1; (($i < 4) && (isset($_COOKIE["reviewed".$i]))); $i++){
 	
-		if ($row = mysql_fetch_array($result))
-			if ($_COOKIE["reviewed". $i] == $row['id']){
-		
+	for ($i = 1; (($i < 4) && (isset($_COOKIE["reviewed".$i]))); $i++){				
+		while ($row = mysql_fetch_array($result)){
+			if ($_COOKIE["reviewed". $i] == $row['id']){		
 				echo "<div class=\"span4\">";
 				echo "	<h2>" . $row['Brand'] . " " . $row['Model'] . "</h2>";
 				echo "	<br/>";	
@@ -43,8 +40,9 @@ if (isset($_COOKIE['reviewed1']))
 				echo "	<p>" . $row['Description'] . "</p>";
 				echo "<p><a href=\"#\" onClick=\"loadWithParams('php/someCar.php', 'car=" . $row['id'] . "')\">View details &#187;</a></p>";
 				echo "</div><!--/span-->";
+			}			
 		}
-		
+		mysql_data_seek($result, 0);
 	}
 
 	echo "</div><!--/row-->";
