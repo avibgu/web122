@@ -27,7 +27,7 @@
 					<div id="loginDiv">
 					
 						<form class="navbar-form pull-right">
-							<?php echo $username; ?>
+							<?php echo "<a href=\"#\" onclick=\"load('php/history.php')\">". $username . "</a>"; ?>
 							&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<button class="btn" onClick="logout()">Sign out</button>
 						</form>
