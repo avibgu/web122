@@ -462,6 +462,12 @@ function checkCookie()
 	var username = getCookie("username");
 	if (null != username && "" != username)
 		alert("you logged-in  !");
+}
 
-	
+function updateRentApprove(index)
+{
+	var values = "CustomerId=" + document.getElementById('Cid' + index).textContent + 
+		"&PickUpDate=" + document.getElementById('Pickdate' + index).textContent +
+			"&PickUpTime=" + document.getElementById('Picktime' + index).textContent;
+	post('php/rentsview.php', values, 'mainDiv');
 }
