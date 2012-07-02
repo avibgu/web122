@@ -1,5 +1,9 @@
 <!-- javascript : Placed at the end of the document so the pages load faster -->
 <script src="scripts/jquery.js"></script>
+	<script src="scripts/jquery.ui.core.js"></script>
+	<script src="scripts/jquery.ui.widget.js"></script>
+	<script src="scripts/jquery.ui.position.js"></script>
+	<script src="scripts/jquery.ui.autocomplete.js"></script>
 <script src="scripts/bootstrap-transition.js"></script>
 <script src="scripts/bootstrap-alert.js"></script>
 <script src="scripts/bootstrap-modal.js"></script>
