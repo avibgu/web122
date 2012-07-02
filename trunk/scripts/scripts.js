@@ -247,7 +247,7 @@ function validateAndSendContactForm()
 	post('php/contactForm.php', content, 'mainDiv');
 }
 
-function validateRegForm()
+function validateRegForm(type)
 {
 	var isValid = validateAllForm();
 	if (isValid){
@@ -260,10 +260,12 @@ function validateRegForm()
 			var input = document.getElementById(fields[i]).value;
 			values =  values + "&" + fields[i] + "=" + input;
 		}
+		if (type!="" && type == "update")
+			values = values + "&reqType=update";
 		post('php/regForm.php', values, 'mainDiv');
 	}
 }
-
+/*
 function validateUpdateForm()
 {
 	var isValid = validateAllForm();
@@ -281,7 +283,7 @@ function validateUpdateForm()
 		post('php/regForm.php', values, 'mainDiv');
 	}
 }
-
+*/
 
 function validateAllForm()
 {
@@ -348,6 +350,23 @@ function validateAllForm()
 	if (x.checked != true){
 		alert("Must Agree To Terms");
 		res = false;
+	}
+	x = document.getElementById("CreditCardNumber");
+	if (x.value!=""){
+		if (!IsNumeric(x.value)){
+			x.style.backgroundColor = "#FF5050";
+			res = false;
+		}
+		c_month = document.getElementById("CreditCardExpMonth");
+		c_year = document.getElementById("CreditCardExpYear");
+		if (c_month.value=="" || !IsNumeric(c_month.value)){
+			c_month.style.backgroundColor = "#FF5050";
+			res = false;
+		}
+		if (c_year.value=="" || !IsNumeric(c_year.value)){
+			c_year.style.backgroundColor = "#FF5050";
+			res = false;
+		}
 	}
 	return res;
 		
