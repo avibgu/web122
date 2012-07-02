@@ -1537,6 +1537,7 @@ table {
 .table-condensed th,
 .table-condensed td {
   padding: 4px 5px;
+  font-size: 13px; /*benny*/
 }
 
 .table-bordered {
