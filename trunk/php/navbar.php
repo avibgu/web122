@@ -37,7 +37,21 @@
 			<?php	
 
 				}
+				else if ("" != $adminuser){
+				?>
+					<div id="loginDiv">
+					
+						<form class="navbar-form pull-right">
+							<?php echo "Welcome Back ". $adminuser . ""; ?>
+							&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<button class="btn" onClick="logout()">Sign out</button>
+						</form>
+						
+					</div>
+					
+			<?php
 				
+				}
 				else {
 				
 			?>
