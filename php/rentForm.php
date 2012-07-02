@@ -1,6 +1,6 @@
 <?php
 
-	if (!isset($_COOKIE['username'])){//save rentdata user wanted
+	if (!isset($_COOKIE['username'])){ //save rentdata user wanted
 		setcookie("rentdata[Brand]", $_POST['Brand'], time()+3600);
 		setcookie("rentdata[Model]", $_POST['Model'], time()+3600);
 		setcookie("rentdata[Year]", $_POST['Year'], time()+3600);
@@ -58,7 +58,7 @@ else
 	
 	$Price = '200';
 	
-	$Approval = 'Approved';
+	$Approval = 'Waiting';
 
 	$insert =	"INSERT INTO lease " .
 				"(CarId, CustomerId, EmployeeId, PickUpDate, PickUpTime, ReturnDate, ReturnTime, Price, Approval) ".
