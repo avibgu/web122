@@ -17,7 +17,7 @@
 		<p>
 			Welcome! we have a special treat for you. rent a car and recieve 40% refund for feture orders.
 		</p>
-		
+		</br></br>
 		<p><a class="btn" href="#" onClick="load('php/registration.php')">Register Now! &#187;</a></p>
 		
 	</div><!--/span-->
@@ -29,7 +29,7 @@
 		<p>
 			10% discount for weekend orders (over 2  days) for A class cars. Time to go on that trip you are planing now.
 		</p>
-		
+		</br>
 		<p><a class="btn" href="#" onClick="load('php/rent.php')">Order Now &#187;</a></p>
 		
 	</div><!--/span-->
