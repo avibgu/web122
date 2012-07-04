@@ -1,6 +1,6 @@
 <div class="hero-unit">
 <?php
-if (isset($_COOKIE['AdminUser']))
+if (isset($_COOKIE['adminuser']))
 {
 ?>
 <div></div>

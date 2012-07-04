@@ -37,12 +37,12 @@
 			<?php	
 
 				}
-				else if ("" != $adminuser){
+				else if (isset($_COOKIE["adminuser"])){
 				?>
 					<div id="loginDiv">
 					
 						<form class="navbar-form pull-right">
-							<?php echo "Welcome Back ". $adminuser . ""; ?>
+							<?php echo "Welcome Back ". $_COOKIE["adminuser"] . ""; ?>
 							&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<button class="btn" onClick="logout()">Sign out</button>
 						</form>
