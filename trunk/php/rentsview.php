@@ -10,7 +10,10 @@ if (isset($_POST['CustomerId'])){
 if (isset($_COOKIE['isAdmin']))
 {
 ?>
-<div></div>
+<div>
+<h2> Current Rent Requests </h2>
+</br>
+</div>
 <table class="table table-condensed">
 	<tr>
 		<th>#</th>
