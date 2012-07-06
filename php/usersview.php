@@ -3,7 +3,10 @@
 if (isset($_COOKIE['isAdmin']))
 {
 ?>
-<div></div>
+<div>
+<h2> Users Registerd </h2>
+</br>
+</div>
 <table class="table table-condensed">
 	<tr>
 		<th>#</th>

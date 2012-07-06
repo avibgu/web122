@@ -1,9 +1,12 @@
 <div class="hero-unit">
 <?php
-if (isset($_COOKIE['adminuser']))
+if (isset($_COOKIE['isAdmin']))
 {
 ?>
-<div></div>
+<div>
+<h2> <?php echo $_GET['Username'] ?> Rents </h2>
+</br>
+</div>
 <table class="table table-condensed">
 	<tr>
 		<th>#</th>
