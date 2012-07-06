@@ -5,8 +5,9 @@
 	require 'php/db.php';
 
 	$username = "";
-	$adminuser = "";
 	$loginError = "OK";
+	
+	$isAdmin = false;
 
 	if (isset($_POST['usernameInput']) && isset($_POST['passwordInput'])) {
 
@@ -24,15 +25,17 @@
 		}
 		else
 		{
-			$query = "SELECT * FROM employee WHERE Username = '" . $_POST['usernameInput']
-				. "' AND Password = '" . $_POST['passwordInput'] . "'";
+			$query = "SELECT * FROM tblemployees WHERE fldUserName = '" . $_POST['usernameInput']
+				. "' AND fldPassword = '" . $_POST['passwordInput'] . "'";
 			
 			$result = mysql_query($query);
 
 			if($row = mysql_fetch_array($result))
 			{
-				$adminuser = $row['Username'];
-				setcookie("adminuser", $adminuser, time()+3600);
+				$isAdmin = true;
+				setcookie("isAdmin", "true", time()+3600);
+				$username = $row['fldUserName'];
+				setcookie("username", $username, time()+3600);
 			}
 			else if($_POST['usernameInput'] != "" || $_POST['passwordInput'] != "") {
 				$loginError = "ERROR";
@@ -72,7 +75,7 @@
 				<div class="span3">
 
 					<?php 
-						if (!isset($_COOKIE["adminuser"]))
+						if (false == $isAdmin)
 							require 'php/sidebar.php'; 
 						else
 							require 'php/sidebaradmin.php';

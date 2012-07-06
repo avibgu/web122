@@ -210,7 +210,7 @@
 					<input class="input-xlarge" type="text" id="CreditCardNumber" placeholder="Credit Card Number"/>
 				</div>
 				
-				<label class="control-label" for="CreditCardExpYear CreditCardExpMonth">Credit Card Number</label>
+				<label class="control-label" for="CreditCardExpYear CreditCardExpMonth">Credit Card Exp. Date</label>
 				<div class="controls">
 					<input class="input-small" type="text" id="CreditCardExpMonth" placeholder="mm"/> &nbsp - &nbsp
 					<input class="input-small" type="text" id="CreditCardExpYear" placeholder="yyyy"/>

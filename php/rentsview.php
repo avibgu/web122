@@ -7,7 +7,7 @@ if (isset($_POST['CustomerId'])){
 	mysql_query($query) or die (mysql_error());
 	mysql_close($con);
 }
-if (isset($_COOKIE['adminuser']))
+if (isset($_COOKIE['isAdmin']))
 {
 ?>
 <div></div>

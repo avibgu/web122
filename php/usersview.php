@@ -1,6 +1,6 @@
 <div class="hero-unit">
 <?php
-if (isset($_COOKIE['adminuser']))
+if (isset($_COOKIE['isAdmin']))
 {
 ?>
 <div></div>
@@ -28,8 +28,8 @@ if (isset($_COOKIE['adminuser']))
 		while ($row = mysql_fetch_array($result))
 		{
 		//$query2 = "SELECT name FROM subscriptiontype WHERE id=".$row['SubscriptionTypeId']."";echo $query2;
-			$subscriptioname = mysql_fetch_array(mysql_query("SELECT name FROM subscriptiontype WHERE id="
-				.$row['SubscriptionTypeId'].""));
+			$subscriptioname = mysql_fetch_array(mysql_query("SELECT name FROM subscriptiontype WHERE id='"
+				.$row['SubscriptionTypeId']."'"));
 			echo "	<tr>
 					<td>$i</td>
 					<td>".$row['FirstName']."</td>

@@ -104,30 +104,30 @@ if(!$result) {
 
 	mysql_query($query);
 	
-	// employee
+	// tblemployees
 	
-	$query = "DROP TABLE IF EXISTS `employee`";
+	$query = "DROP TABLE IF EXISTS `tblemployees`";
 
 	mysql_query($query);
 	
-	$query = "CREATE TABLE `employee` (
-	  `Id` int(11) NOT NULL,
-	  `FirstName` varchar(45) NOT NULL,
-	  `LastName` varchar(45) NOT NULL,
-	  `Username` varchar(45) NOT NULL,
-	  `Password` varchar(45) NOT NULL,
-	  PRIMARY KEY (`Id`),
-	  UNIQUE KEY `Id_UNIQUE` (`Id`),
-	  UNIQUE KEY `Username_UNIQUE` (`Username`)
-	) ENGINE=InnoDB DEFAULT CHARSET=latin1";
+	$query = "CREATE TABLE `tblemployees` (
+			`fldEmpId` int(11) NOT NULL AUTO_INCREMENT,
+			`fldPassword` varchar(20) NOT NULL,
+			`fldUserName` varchar(20) NOT NULL,
+			`fldFname` varchar(20) NOT NULL,
+			`fldLname` varchar(20) NOT NULL,
+			PRIMARY KEY (`fldEmpId`),
+			UNIQUE KEY `Id_UNIQUE` (`fldEmpId`),
+			UNIQUE KEY `fldUserName_UNIQUE` (`fldUserName`)
+			) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1";
+
+	mysql_query($query);
+
+	$query = "LOCK TABLES `tblemployees` WRITE";
 
 	mysql_query($query);
 	
-	$query = "LOCK TABLES `employee` WRITE";
-
-	mysql_query($query);
-	
-	$query = "INSERT INTO `employee` VALUES (1,'Avi','Digmi','avidigmi','12345')";
+	$query = "INSERT INTO `tblemployees` VALUES (1,'12345','avi','Avi','Digmi'),(2,'12345','benny','Benny','Michaeli')";
 
 	mysql_query($query);
 	
@@ -211,25 +211,25 @@ if(!$result) {
 	mysql_query($query);
 	
 	$query = "CREATE TABLE `lease` (
-	  `CarId` int(11) NOT NULL,
-	  `CustomerId` int(11) NOT NULL,
-	  `EmployeeId` int(11) NOT NULL,
-	  `PickUpDate` date NOT NULL,
-	  `PickUpTime` time NOT NULL,
-	  `ReturnDate` date NOT NULL,
-	  `ReturnTime` time NOT NULL,
-	  `Id` int(11) NOT NULL AUTO_INCREMENT,
-	  `Price` int(11) NOT NULL,
-	  `Approval` varchar(45) NOT NULL,
-	  PRIMARY KEY (`CarId`,`CustomerId`,`PickUpDate`,`PickUpTime`,`EmployeeId`),
-	  UNIQUE KEY `Id_UNIQUE` (`Id`),
-	  KEY `CarIdFK` (`CarId`),
-	  KEY `CustomerIdFK` (`CustomerId`),
-	  KEY `EmployeeIdFK` (`EmployeeId`),
-	  CONSTRAINT `CarIdFK` FOREIGN KEY (`CarId`) REFERENCES `car` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-	  CONSTRAINT `CustomerIdFK` FOREIGN KEY (`CustomerId`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-	  CONSTRAINT `EmployeeIdFK` FOREIGN KEY (`EmployeeId`) REFERENCES `employee` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-	) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1";
+			`CarId` int(11) NOT NULL,
+			`CustomerId` int(11) NOT NULL,
+			`EmployeeId` int(11) NOT NULL,
+			`PickUpDate` date NOT NULL,
+			`PickUpTime` time NOT NULL,
+			`ReturnDate` date NOT NULL,
+			`ReturnTime` time NOT NULL,
+			`Id` int(11) NOT NULL AUTO_INCREMENT,
+			`Price` int(11) NOT NULL,
+			`Approval` varchar(45) NOT NULL,
+			PRIMARY KEY (`CarId`,`CustomerId`,`PickUpDate`,`PickUpTime`,`EmployeeId`),
+			UNIQUE KEY `Id_UNIQUE` (`Id`),
+			KEY `CarIdFK` (`CarId`),
+			KEY `CustomerIdFK` (`CustomerId`),
+			KEY `EmployeeIdFK` (`EmployeeId`),
+			CONSTRAINT `EmployeeIdFK` FOREIGN KEY (`EmployeeId`) REFERENCES `tblemployees` (`fldEmpId`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+			CONSTRAINT `CarIdFK` FOREIGN KEY (`CarId`) REFERENCES `car` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+			CONSTRAINT `CustomerIdFK` FOREIGN KEY (`CustomerId`) REFERENCES `customer` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+			) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1";
 
 	mysql_query($query);
 	

@@ -21,7 +21,7 @@
 					$username = $_COOKIE["username"];
 				}
 				
-				if ("" != $username) {
+				if ("" != $username && false == $isAdmin) {
 			?>	
 			
 					<div id="loginDiv">
@@ -37,12 +37,12 @@
 			<?php	
 
 				}
-				else if (isset($_COOKIE["adminuser"])){
-				?>
+				else if ("" != $username && true == $isAdmin){
+			?>
 					<div id="loginDiv">
 					
 						<form class="navbar-form pull-right">
-							<?php echo "Welcome Back ". $_COOKIE["adminuser"] . ""; ?>
+							<?php echo "Welcome Back ". $username . ""; ?>
 							&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<button class="btn" onClick="logout()">Sign out</button>
 						</form>
