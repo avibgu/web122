@@ -21,7 +21,7 @@
 		$result = mysql_query($query);
 		if (mysql_num_rows($result) > 0)
 			echo "<div class=\"hero-unit\"><h3> One of the details you enterd already exists. You can contact support 
-			<a href=\"php/contact.php\"> here </a></h3></div>";
+			<a href=\"#\" onClick=\"load('php/contact.php')\"> here </a></h3></div>";
 		else {
 			$query = "insert into customer values (" . $_POST['inputID'] . ",'" . $_POST['inputFirstName'] . "','" . $_POST['inputLastName'] 
 				. "','" . $_POST['inputEmail'] . "','" . $_POST['inputPassword'] . "','" . $_POST['inputEmail'] . "'," . 0 . "," . 1 . ",'" . date("y-m-d H:i:s")

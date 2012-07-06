@@ -27,6 +27,30 @@ function get(page, params, whereToLoad)
 	xmlhttp.send();
 }
 
+function getDefault()
+{
+	if (window.XMLHttpRequest)
+	{// code for IE7+, Firefox, Chrome, Opera, Safari
+		xmlhttp = new XMLHttpRequest();
+	}
+	else
+	{// code for IE6, IE5
+		xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+
+	xmlhttp.onreadystatechange = function()
+	{
+		if (4 == xmlhttp.readyState && 200 == xmlhttp.status)
+		{
+			document.innerHTML = xmlhttp.responseText;
+		}
+	}
+
+	xmlhttp.open("GET", "default.php", true);
+		
+	xmlhttp.send();
+}
+
 function post(page, content, whereToLoad)
 {
 	if (window.XMLHttpRequest)
@@ -72,9 +96,11 @@ function logout()
 	
 	exdate.setDate(exdate.getDate() - 3600);
 
-	document.cookie = "username=AVI; expires=" + exdate.toUTCString();
+	document.cookie = "username=NONE; expires=" + exdate.toUTCString();
+	document.cookie = "isAdmin=false; expires=" + exdate.toUTCString();
 	
-	reloadNavBar();
+	//reloadNavBar();
+	getDefault();
 }
 
 function reloadNavBar()
