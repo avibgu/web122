@@ -9,6 +9,8 @@
 	
 	$isAdmin = false;
 
+	if (isset($_COOKIE['isAdmin']))
+		$isAdmin = true;
 	if (isset($_POST['usernameInput']) && isset($_POST['passwordInput'])) {
 
 		require 'php/php/conn.php';
@@ -27,7 +29,7 @@
 		{
 			$query = "SELECT * FROM tblemployees WHERE fldUserName = '" . $_POST['usernameInput']
 				. "' AND fldPassword = '" . $_POST['passwordInput'] . "'";
-			
+
 			$result = mysql_query($query);
 
 			if($row = mysql_fetch_array($result))
