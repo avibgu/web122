@@ -30,15 +30,13 @@ else
 	$query =	"SELECT C.id " .
 				"FROM cartype as CT JOIN car as C " .
 				"WHERE CT.Brand = '" . $_POST['Brand'] . "' AND CT.Model = '" .
-				$_POST['Model'] . "' AND CT.Year = '" .$_POST['Year'] . "' AND C.Availability = '1'";
+				$_POST['Model'] . "' AND CT.Year = '" .$_POST['Year'] . "' AND C.Availability > 1";
 	
 	$result = mysql_query($query);
-	
 	$CarId = '0';
 	
 	if ($row = mysql_fetch_array($result))
 		$CarId = $row['id'];
-
 	$query = "SELECT id FROM customer WHERE Username = '". $_COOKIE['username'] . "'";
 	
 	$result = mysql_query($query);
@@ -63,7 +61,6 @@ else
 	$insert =	"INSERT INTO lease " .
 				"(CarId, CustomerId, EmployeeId, PickUpDate, PickUpTime, ReturnDate, ReturnTime, Price, Approval) ".
 				"VALUES ('$CarId','$CustomerId','$EmployeeId','$PickUpDate','$PickUpTime','$ReturnDate','$ReturnTime','$Price','$Approval')";
-				
 	if (!mysql_query($insert, $con)){
 
 ?>
@@ -83,7 +80,7 @@ else
 
 <div class="hero-unit">
 
-	<h3>Your Rental has been Approved !</h3>
+	<h3>Your Rental has been Accepted !</h3>
 	
 </div>
 

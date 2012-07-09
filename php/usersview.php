@@ -15,9 +15,6 @@ if (isset($_COOKIE['isAdmin']))
 		<th>Username\Email</th>
 		<th>Registration Date</th>
 		<th>Subscription Type</th>
-		<th>Phone</th>
-		<th>Address</th>
-		<th>Birth Year</th>
 		<th>Valid License</th>
 		<th>Current Rents</th>
 	</tr>
@@ -40,9 +37,6 @@ if (isset($_COOKIE['isAdmin']))
 					<td>".$row['Username']."</td>
 					<td>".$row['RegistrationDate']."</td>
 					<td>".$subscriptioname['name']."</td>
-					<td>0000000</td>
-					<td>Address</td>
-					<td>Birth Year</td>
 					<td>Yes</td>
 					<td><a href='#' onClick=\"loadWithParams('php/userrents.php', 'Username=".$row['Username']."&CustomerId=".$row['id']."')\">View Rents</a></td>
 					</tr>";
