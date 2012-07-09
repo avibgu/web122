@@ -61,9 +61,9 @@ else
 	$Approval = 'Waiting';
 
 	$insert =	"INSERT INTO lease " .
-				"(CarId, CustomerId, EmployeeId, PickUpDate, PickUpTime, ReturnDate, ReturnTime, Id, Price, Approval) ".
-				"VALUES ('$CarId','$CustomerId','$EmployeeId','$PickUpDate','$PickUpTime','$ReturnDate','$ReturnTime', '122', '$Price','$Approval')";
-	echo $insert;			
+				"(CarId, CustomerId, EmployeeId, PickUpDate, PickUpTime, ReturnDate, ReturnTime, Price, Approval) ".
+				"VALUES ('$CarId','$CustomerId','$EmployeeId','$PickUpDate','$PickUpTime','$ReturnDate','$ReturnTime','$Price','$Approval')";
+				
 	if (!mysql_query($insert, $con)){
 
 ?>
