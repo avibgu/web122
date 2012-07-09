@@ -6,7 +6,24 @@ $con = mysql_connect('localhost', 'digmia', "RYkUhstj");
 if ($con)
 	$result = mysql_select_db('web122G7');
 
+if ($result){
+
+	$query = "SHOW TABLES FROM web122G7";
+	$tables = mysql_query($query);
+	
+	if (!$tables)
+		$result = false;
+
+	while ($row = mysql_fetch_row($tables))
+		if ("employee" == $row[0])
+			$result = false;
+}
+	
 if(!$result) {
+
+	$query = "DROP DATABASE web122G7";
+	
+	mysql_query($query, $con);
 
 	$query = "CREATE DATABASE IF NOT EXISTS `web122G7`";
 
@@ -66,8 +83,8 @@ if(!$result) {
 	$query = "LOCK TABLES `car` WRITE";
 
 	mysql_query($query);
-	
-	$query = "INSERT INTO `car` VALUES (1,1,1)";
+
+	$query = "INSERT INTO `car` VALUES (1,1,5),(2,2,3),(3,3,4),(4,4,6),(5,5,5),(6,6,4),(7,7,6)";
 
 	mysql_query($query);
 	
