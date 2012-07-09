@@ -275,16 +275,24 @@ function validateAndSendContactForm()
 
 function validateRegForm(type)
 {
-	var isValid = validateAllForm();
+	var isValid = true;
+	if (type == "")	//if user updates we dont validate registration fields
+		isValid = validateAllForm();
+	else 
+		isValid = validateCreditCard();
 	if (isValid){
 		var fields = new Array("inputID","inputFirstName","inputLastName","inputAddress","inputCity","inputZipCode","inputPhone","inputEmail","inputPassword",
 		"inputRetypePassword","inputLicenseNo","inputLicenseNo","selectYear","selectMonth","selectDay","selectYearBirth","selectMonthBirth",
-		"selectDayBirth");
+		"selectDayBirth", "CreditCardNumber");
 		var i, values;
+		var user = getCookie("username");
 		values = fields[0] + "=" + document.getElementById(fields[0]).value;
 		for (i=1; i<fields.length; i++){
 			var input = document.getElementById(fields[i]).value;
-			values =  values + "&" + fields[i] + "=" + input;
+			if (input == "" && fields[i] == "inputEmail" && type == "update")//user upadtes
+				values = values + "&" + fields[i] + "=" + user;
+			else
+				values =  values + "&" + fields[i] + "=" + input;
 		}
 		if (type!="" && type == "update")
 			values = values + "&reqType=update";
@@ -379,6 +387,29 @@ function validateAllForm()
 		
 }
 
+function validateCreditCard()
+{	
+	var res =true;
+	var x = document.getElementById("CreditCardNumber");
+	if (x.value!=""){
+		if (!IsNumeric(x.value)){
+			x.style.backgroundColor = "#FF5050";
+			res = false;
+		}
+		c_month = document.getElementById("CreditCardExpMonth");
+		c_year = document.getElementById("CreditCardExpYear");
+		if (c_month.value=="" || !IsNumeric(c_month.value)){
+			c_month.style.backgroundColor = "#FF5050";
+			res = false;
+		}
+		if (c_year.value=="" || !IsNumeric(c_year.value)){
+			c_year.style.backgroundColor = "#FF5050";
+			res = false;
+		}
+	}
+	return res;
+}
+
 function IsNumeric(sText)
 {
    var ValidChars = "0123456789";
@@ -468,9 +499,9 @@ function updateRentApprove(index)
 	post('php/rentsview.php', values, 'mainDiv');
 }
 
-function editCarAmount(carId)
+function editCarAmount(carId, index)
 {
-	var x = document.getElementById("Availability");
+	var x = document.getElementById("Availability" + index);
 	if (x.value != "" && IsNumeric(x.value))
 		loadWithParams('php/carsview.php', "CarTypeId=" + carId + "&Amount=" + x.value);
 	else
