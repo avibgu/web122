@@ -39,8 +39,8 @@ if (isset($_GET['CarTypeId'])){
 					<td>".$row['id']."</td>
 					<td>".$row['Brand'] ." " . $row['Model'] ."</td>
 					<td>".$row['Year']."</td>
-					<td><input class=\"input-small\" type=\"text\" id=\"Availability\" placeholder=".$caramount['Availability']."></td>
-					<td><a href='#' onClick=\"editCarAmount(".$caramount['CarTypeId'].")\">Edit Amount</a></td>
+					<td><input class=\"input-small\" type=\"text\" id=\"Availability". $i ."\" placeholder=".$caramount['Availability']."></td>
+					<td><a class=\"btn\" href='#' onClick=\"editCarAmount(".$caramount['CarTypeId']. "," . $i .")\">Edit Amount</a></td>
 					</tr>";
 			$i++;
 		}

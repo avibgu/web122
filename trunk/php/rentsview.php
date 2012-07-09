@@ -2,8 +2,8 @@
 <?php
 if (isset($_POST['CustomerId'])){
 	require 'php/conn.php';
-	$query = "UPDATE lease SET Approval='Approved' WHERE CustomerId=" . $_POST['CustomerId'];/* . " And PickUpDate='" . $_POST['PickUpDate'] 
-		. "' And PickUpTime='". $_POST['PickUpTime'] ."'";*/
+	$query = "UPDATE lease SET Approval='Approved' WHERE CustomerId=" . $_POST['CustomerId'] . " And PickUpDate='" . $_POST['PickUpDate'] 
+		. "' And PickUpTime='". $_POST['PickUpTime'] ."'";
 	mysql_query($query) or die (mysql_error());
 	mysql_close($con);
 }
