@@ -291,25 +291,6 @@ function validateRegForm(type)
 		post('php/regForm.php', values, 'mainDiv');
 	}
 }
-/*
-function validateUpdateForm()
-{
-	var isValid = validateAllForm();
-	if (isValid){
-		var fields = new Array("inputID","inputFirstName","inputLastName","inputAddress","inputCity","inputZipCode","inputPhone","inputEmail","inputPassword",
-		"inputRetypePassword","inputLicenseNo","inputLicenseNo","selectYear","selectMonth","selectDay","selectYearBirth","selectMonthBirth",
-		"selectDayBirth");
-		var i, values;
-		values = fields[0] + "=" + document.getElementById(fields[0]).value;
-		for (i=1; i<fields.length; i++){
-			var input = document.getElementById(fields[i]).value;
-			values =  values + "&" + fields[i] + "=" + input;
-		}
-		values = values + "&reqType=update";
-		post('php/regForm.php', values, 'mainDiv');
-	}
-}
-*/
 
 function validateAllForm()
 {
@@ -416,17 +397,6 @@ function IsNumeric(sText)
 function clearRegForm()
 {
 	load('php/registration.php');
-	/*var fields = new Array("inputID","inputFirstName","inputLastName","inputAddress","inputCity","inputZipCode","inputPhone","inputEmail","inputPassword",
-		"inputRetypePassword","inputLicenseNo","inputLicenseNo","selectYear","selectMonth","selectDay","selectYearBirth","selectMonthBirth",
-		"selectDayBirth");
-	var i;
-	for (i=0; i<fields.length; i++){
-		var input = document.getElementById(fields[i]);
-		var p = input.parentNode;
-		p.innerHTML = p.innerHTML;
-		input.style.backgroundColor = "#FFFFFF";
-	}
-	document.getElementById("checkboxAgree").checked = false;*/
 }
 
 function validateAndSendSubscriptionForm()
@@ -496,4 +466,13 @@ function updateRentApprove(index)
 		"&PickUpDate=" + document.getElementById('Pickdate' + index).textContent +
 			"&PickUpTime=" + document.getElementById('Picktime' + index).textContent;
 	post('php/rentsview.php', values, 'mainDiv');
+}
+
+function editCarAmount(carId)
+{
+	var x = document.getElementById("Availability");
+	if (x.value != "" && IsNumeric(x.value))
+		loadWithParams('php/carsview.php', "CarTypeId=" + carId + "&Amount=" + x.value);
+	else
+		alert("Must Enter Valid Amount");
 }
