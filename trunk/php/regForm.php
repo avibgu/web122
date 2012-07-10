@@ -39,7 +39,6 @@
 			$creditcard = 0;
 			if ($_POST['CreditCardNumber'] != "")
 				$creditcard = $_POST['CreditCardNumber'];
-			print_r($_POST);
 			$query = "insert into customer values (" . $_POST['inputID'] . ",'" . $_POST['inputFirstName'] . "','" . $_POST['inputLastName'] 
 				. "','" . $_POST['inputEmail'] . "','" . $_POST['inputPassword'] . "','" . $_POST['inputEmail'] . "'," . $creditcard . "," . 1 . ",'" . date("y-m-d H:i:s")
 				. "'," . $_POST['inputLicenseNo'] . ")";				
