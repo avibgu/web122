@@ -42,7 +42,13 @@
 					<div id="loginDiv">
 					
 						<form class="navbar-form pull-right">
-							<?php echo "Welcome Back ". $username . ""; ?>
+							<?php 
+							require 'php/conn.php';
+							$result = mysql_query("SELECT * FROM tblemployees WHERE fldUserName Like '$username'") or die (mysql_error());
+							$row = mysql_fetch_array($result);
+							echo "Welcome Back ". $row['fldFname'] ." " . $row['fldLname'] . ""; 
+							mysql_close($con);
+							?>
 							&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<button class="btn" onClick="logout()">Sign out</button>
 						</form>
